@@ -27,4 +27,27 @@ RSpec.describe 'USER API' do
       expect(user[:attributes][:email]).to be_an(String)
     end
   end
+
+  it 'can get one user by its id' do
+    id = create(:user).id
+
+    get "/api/v1/users/#{id}"
+
+    expect(response).to be_successful
+
+    json = JSON.parse(response.body, symbolize_names: true)
+    user = json[:data]
+
+    expect(user).to have_key(:id)
+    expect(user[:id]).to be_an(String)
+
+    expect(user).to have_key(:type)
+    expect(user[:type]).to be_an(String)
+
+    expect(user).to have_key(:attributes)
+    expect(user[:attributes]).to be_a(Hash)
+
+    expect(user[:attributes]).to have_key(:email)
+    expect(user[:attributes][:email]).to be_an(String)
+  end
 end
