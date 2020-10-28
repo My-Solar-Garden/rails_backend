@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_202019) do
+ActiveRecord::Schema.define(version: 2020_10_28_202547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2020_10_28_202019) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sensors", force: :cascade do |t|
+    t.bigint "garden_id"
+    t.integer "sensor_type"
+    t.integer "min_threshold"
+    t.integer "max_threshold"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["garden_id"], name: "index_sensors_on_garden_id"
   end
 
   create_table "user_gardens", force: :cascade do |t|

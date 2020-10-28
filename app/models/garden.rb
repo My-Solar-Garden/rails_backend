@@ -3,4 +3,5 @@ class Garden < ApplicationRecord
 
   has_many :user_gardens
   has_many :users, through: :user_gardens
+  has_many :sensors
 end
