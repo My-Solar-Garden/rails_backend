@@ -86,6 +86,10 @@ ActiveRecord::Schema.define(version: 2020_10_28_213229) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "garden_healths", "sensors"
   add_foreign_key "garden_plants", "gardens"
   add_foreign_key "garden_plants", "plants"
+  add_foreign_key "sensors", "gardens"
+  add_foreign_key "user_gardens", "gardens"
+  add_foreign_key "user_gardens", "users"
 end
