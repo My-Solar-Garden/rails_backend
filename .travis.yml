@@ -9,5 +9,9 @@ script:
 deploy:
   provider: heroku
   api_key:
-  app:
-  run: rails db:migrate 
+    secure: UyWiwKBZP2LyaL0DGDgsRyECCaZLnNEHdkfPWGat8LTUOUoRVVbU7zt/t5/i583lqk6CLkwTVocAEhbPWnZ7V3YX5UICqNa37v9+nzTuIG6KvOv9FnFV4C6TNOOw2sCG7PFzxlMp9kcpemYdgnFeBltZC9NQFGH4podBbmQOafFMlcZMgVODk5bRRlCU0/owxzqDAcNPK/ZbXo1FA+Y+GqQUEWe/BWyUlPl8rhnrXJh2aFBwVHsn9Mcts5TQTgF9sy9qsh+MTgS3yPZNVx/utdByUceYo6G+HnNcG7sWJQBkl7/YOeYlwWFLtYj17y1A7iwHSb0HiRrOlpuEuRx3Ql8V59DoK+QLiRCzBFYnm9GGBz0NXoX/2fNoJSsegExyaC3MPVP79alKTVAnzJGXI2DOc4lxSrqCW0TZlE5m66xi5TwkE8+nreTkrp/07LMD8N0aIqcYHeRnTdez2yrUj4JNCJIGvr0prR7Al3aSV64c2yRa9Whf4FwQYKjupns1HjOTVO7Q8SF8fANSvC/4RpS9qGo8OQbUfpgtyS4jum22vk2ERkYEZs5UQmLLxUSXzRxXyV4lWPHCwbvQnPnrqLrnfp9fHDJwvh4mcbRKg+Z+f6/BgnkfV3xc3/NioL3Rco9CmxLZDJHspb0LugBEmkDMq+TfjrNLW+g4TAIggU8=
+  app: rails_backend
+  on:
+    repo: My-Solar-Garden/rails_backend
+    branch: travis
+  skip_cleanup: 'true'
