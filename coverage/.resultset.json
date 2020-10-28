@@ -5,6 +5,9 @@
         "lines": [
           1,
           1,
+          null,
+          1,
+          1,
           null
         ]
       },
@@ -15,8 +18,19 @@
           null
         ]
       },
+      "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/user_garden.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/user.rb": {
         "lines": [
+          1,
+          1,
+          null,
           1,
           1,
           null
@@ -31,6 +45,6 @@
         }
       }
     },
-    "timestamp": 1603916332
+    "timestamp": 1603916698
   }
 }
