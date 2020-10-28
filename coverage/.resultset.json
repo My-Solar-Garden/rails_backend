@@ -30,6 +30,13 @@
           null
         ]
       },
+      "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/plant.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
       "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/sensor.rb": {
         "lines": [
           1,
@@ -69,6 +76,6 @@
         }
       }
     },
-    "timestamp": 1603919468
+    "timestamp": 1603920699
   }
 }
