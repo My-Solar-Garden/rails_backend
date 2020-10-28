@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/user.rb": {
+      "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/garden.rb": {
         "lines": [
           1,
           1,
@@ -9,6 +9,13 @@
         ]
       },
       "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/hashgari/Turing/mod_3/projects/solar_garden/rails_backend/app/models/user.rb": {
         "lines": [
           1,
           1,
@@ -24,6 +31,6 @@
         }
       }
     },
-    "timestamp": 1603916110
+    "timestamp": 1603916332
   }
 }
