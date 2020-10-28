@@ -79,4 +79,13 @@ RSpec.describe 'USER API' do
     expect(user.token).to_not eq(previous_token)
     expect(user.token).to eq(user_params[:token])
   end
+
+  it 'can destroy a user' do
+    id = create(:user).id
+
+    expect{ delete "/api/v1/users/#{id}" }.to change(User, :count).by(-1)
+
+    expect(response).to be_successful
+    expect{User.find(id)}.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end
