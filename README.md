@@ -1,15 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the repo for the backend of the My-Solar-Garden app.
 
-Things you may want to cover:
 
 * Ruby version
 
+    ![](https://img.shields.io/badge/Ruby-2.5.3-orange)
+* Rails version
+
+    ![](https://img.shields.io/badge/Rails-5.2.4-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
+
 * System dependencies
+    -
 
 * Configuration
+    - `bundle install`
+    - `rails db:{create,migrate}`
 
 * Database creation
 
