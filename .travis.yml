@@ -9,5 +9,5 @@ script:
 deploy:
   provider: heroku
   api_key:
-  app: 
-  run: rails db:migrate
+  app:
+  run: rails db:migrate 
