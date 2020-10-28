@@ -13,6 +13,11 @@ RSpec.describe Plant, type: :model do
     it { should validate_presence_of :common_pests }
   end
 
+  describe 'relationships' do
+    it { should have_many :garden_plants }
+    it { should have_many(:gardens).through(:garden_plants) }
+  end
+
   describe 'creation' do
     it 'can create a new plant' do
       Plant.create!(

@@ -11,6 +11,8 @@ RSpec.describe Garden, type: :model do
     it { should have_many :user_gardens }
     it { should have_many(:users).through(:user_gardens) }
     it { should have_many :sensors }
+    it { should have_many :garden_plants }
+    it { should have_many(:plants).through(:garden_plants) }
   end
 
   describe 'creation' do
