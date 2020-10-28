@@ -50,4 +50,18 @@ RSpec.describe 'USER API' do
     expect(user[:attributes]).to have_key(:email)
     expect(user[:attributes][:email]).to be_an(String)
   end
+
+  it 'can create a new user' do
+    user_params = ({email: Faker::Internet.email, provider: 'Google', token: '123'})
+    headers = {"CONTENT_TYPE" => "application/json"}
+    post "/api/v1/users", headers: headers, params: JSON.generate(user_params)
+
+    created_user = User.last
+
+    expect(response).to be_successful
+
+    expect(created_user.email).to eq(user_params[:email])
+    expect(created_user.provider).to eq(user_params[:provider])
+    expect(created_user.token).to eq(user_params[:token])
+  end
 end
