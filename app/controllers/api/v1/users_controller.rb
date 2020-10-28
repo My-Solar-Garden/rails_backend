@@ -11,6 +11,10 @@ class Api::V1::UsersController < ApplicationController
     render json: UserSerializer.new(User.create(user_params))
   end
 
+  def update
+    render json: UserSerializer.new(User.update(params[:id], user_params))
+  end
+
   private
 
   def user_params
