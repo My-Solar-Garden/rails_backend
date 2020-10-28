@@ -8,6 +8,7 @@ RSpec.describe Sensor, type: :model do
 
   describe 'relationships' do
     it { should belong_to :garden }
+    it { should have_many :garden_healths }
   end
 
   describe 'creation' do
