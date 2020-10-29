@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :garden_healths
+      resources :gardens
+      resources :users
     end
   end
 end

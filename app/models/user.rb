@@ -3,4 +3,8 @@ class User < ApplicationRecord
 
   has_many :user_gardens
   has_many :gardens, through: :user_gardens
+
+  def self.exist?(id)
+    find(id) rescue false
+  end
 end
