@@ -61,5 +61,23 @@ describe 'garden API' do
         expect(garden[:attributes][:longitude]).to eq(new_garden.longitude)
         expect(garden[:attributes][:name]).to eq(new_garden.name)
       end
+
+      it 'can create a new garden' do
+        garden_params = {longitude: 100.5, latitude: 97.5, name: "Garden 1", description: "it's a garden, what else do you want to know?"}
+
+        headers = {"CONTENT_TYPE" => "application/json"}
+        post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
+
+        garden = Garden.last
+
+        expect(response).to be_successful
+        expect(garden.longitude).to eq(garden_params[:longitude])
+        expect(garden.latitude).to eq(garden_params[:latitude])
+        expect(garden.name).to eq(garden_params[:name])
+      end
+
+      it 'can update an existing garden' do
+        
+      end
   end
 end
