@@ -16,6 +16,10 @@ class Api::V1::PlantsController < ApplicationController
     render json: PlantSerializer.new(Plant.update(params[:id], plant_params))
   end
 
+  def destroy
+    Plant.destroy(params[:id])
+  end
+
   private
   def plant_params
     params.permit(:image, :name, :species, :description, :light_requirements, :water_requirements, :when_to_plant, :harvest_time, :common_pests)

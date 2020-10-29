@@ -136,5 +136,15 @@ describe 'plant API' do
         expect(updated_plant.name).to_not eq(plant.name)
         expect(updated_plant.name).to eq(plant_params[:name])
       end
+
+      it 'can destroy a plant' do
+        plant = create(:plant)
+
+        expect(Plant.count).to eq(1)
+        delete "/api/v1/plants/#{plant.id}"
+        expect(response).to be_successful
+        expect(Plant.count).to eq(0)
+        expect{Plant.find(plant.id)}.to raise_error(ActiveRecord::RecordNotFound)
+      end
   end
 end
