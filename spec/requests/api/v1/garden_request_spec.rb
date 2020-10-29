@@ -33,7 +33,7 @@ describe 'garden API' do
     end
 
       it 'can return a garden by its id' do
-        new_garden = create(:garden)
+        new_garden = create(:garden, longitude: 100.100, latitude: 95.95)
         get "/api/v1/gardens/#{new_garden.id}"
         expect(response).to be_successful
 
