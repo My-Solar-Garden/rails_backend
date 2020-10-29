@@ -92,7 +92,7 @@ RSpec.describe 'USER API' do
   end
 
   describe 'sad-paths' do
-    it 'index - returns a 204 if query entered wrong' do
+    it 'index - returns a 204 if user table is empty' do
       get '/api/v1/users'
       expect(response).to be_successful
       expect(response.status).to eq(204)
