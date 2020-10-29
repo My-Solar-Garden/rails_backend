@@ -20,6 +20,19 @@ RSpec.describe 'GardenHealth API' do
       end
     end
 
+    it "can get one garden health record by its id" do
+      id = create(:garden_health).id
+
+      get "/api/v1/garden_healths/#{id}"
+
+      expect(response).to be_successful
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      garden_health = json[:data]
+
+      gh_serializer_check(garden_health)
+    end
+
     def gh_serializer_check(garden_health)
       expect(garden_health).to have_key(:id)
       expect(garden_health[:id]).to be_a(String)
