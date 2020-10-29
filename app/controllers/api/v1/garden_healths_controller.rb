@@ -6,4 +6,14 @@ class Api::V1::GardenHealthsController < ApplicationController
   def show
     render json: GardenHealthSerializer.new(GardenHealth.find(params[:id]))
   end
+
+  def create
+    render json: GardenHealthSerializer.new(GardenHealth.create(garden_health_params))
+  end
+
+  private
+
+  def garden_health_params
+    params.permit(:sensor_id, :reading_type, :reading, :time_of_reading)
+  end
 end

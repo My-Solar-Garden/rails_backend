@@ -33,6 +33,31 @@ RSpec.describe 'GardenHealth API' do
       gh_serializer_check(garden_health)
     end
 
+    it "can create a new garden health record" do
+      sensor = create(:sensor)
+      garden_health_params = {
+                              sensor_id: sensor.id,
+                              reading_type: 0,
+                              reading: 123.456,
+                              time_of_reading: "2020-10-29 03:05:41.000000000 +0000"
+                            }
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      post "/api/v1/garden_healths", headers: headers, params: JSON.generate(garden_health_params)
+
+      expect(response).to be_successful
+      gh = JSON.parse(response.body, symbolize_names: true)
+      gh_serializer_check(gh[:data])
+
+      garden_health = GardenHealth.last
+
+      expect(garden_health.sensor_id).to eq(sensor.id)
+      expect(garden_health.reading_type).to eq("moisture")
+      expect(garden_health.reading).to eq(garden_health_params[:reading])
+      expect(garden_health.time_of_reading).to eq(garden_health_params[:time_of_reading])
+    end
+
     def gh_serializer_check(garden_health)
       expect(garden_health).to have_key(:id)
       expect(garden_health[:id]).to be_a(String)
