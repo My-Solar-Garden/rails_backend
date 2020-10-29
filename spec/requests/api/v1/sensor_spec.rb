@@ -34,7 +34,7 @@ RSpec.describe "Sensors" do
      expect(sensors[:data][:attributes][:sensor_type]).to eq("moisture")
     end
 
-    it "can create one sensor from a garden" do
+    it "can create a sensor for a garden" do
       sensor_params = {
                        min_threshold: 5,
                        max_threshold: 14,
@@ -54,6 +54,21 @@ RSpec.describe "Sensors" do
        expect(sensors[:data][:attributes][:sensor_type]).to eq("moisture")
        expect(sensors[:data][:attributes][:min_threshold]).to eq(5)
        expect(sensors[:data][:attributes][:max_threshold]).to eq(14)
+    end
+
+    it "cannot create a sensor for a garden with a missing params" do
+      expect(Sensor.count).to eq(2)
+
+      sensor_params = {
+                       min_threshold: 5,
+                       max_threshold: 14,
+                       garden_id: @garden.id
+                     }
+       headers = {"CONTENT_TYPE" => "application/json"}
+
+       post "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors", headers: headers, params: JSON.generate(sensor_params)
+
+       expect(Sensor.count).to eq(2)
     end
 
     it "can update one sensor from a garden" do
