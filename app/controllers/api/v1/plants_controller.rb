@@ -1,9 +1,11 @@
 class Api::V1::PlantsController < ApplicationController
   def index
+    return nil if Plant.all.empty?
     render json: PlantSerializer.new(Plant.all)
   end
 
   def show
+    return nil if !Plant.exists?(params[:id])
     render json: PlantSerializer.new(Plant.find(params[:id]))
   end
 
@@ -13,10 +15,12 @@ class Api::V1::PlantsController < ApplicationController
   end
 
   def update
+    return nil if !Plant.exists?(params[:id])
     render json: PlantSerializer.new(Plant.update(params[:id], plant_params))
   end
 
   def destroy
+    return nil if !Plant.exists?(params[:id])
     Plant.destroy(params[:id])
   end
 
