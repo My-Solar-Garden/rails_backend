@@ -76,6 +76,15 @@ RSpec.describe 'GardenHealth API' do
       expect(garden_health.reading).to eq(garden_health_params[:reading])
     end
 
+    it "can destroy a garden health record" do
+      id = create(:garden_health).id
+
+      expect{delete "/api/v1/garden_healths/#{id}"}.to change(GardenHealth, :count).by(-1)
+      expect(response).to be_successful
+
+      expect{GardenHealth.find(id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
     def gh_serializer_check(garden_health)
       expect(garden_health).to have_key(:id)
       expect(garden_health[:id]).to be_a(String)

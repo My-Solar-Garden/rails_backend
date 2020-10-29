@@ -15,6 +15,10 @@ class Api::V1::GardenHealthsController < ApplicationController
     render json: GardenHealthSerializer.new(GardenHealth.update(params[:id], garden_health_params))
   end
 
+  def destroy
+    GardenHealth.destroy(params[:id])
+  end
+
   private
 
   def garden_health_params
