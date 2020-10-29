@@ -58,6 +58,24 @@ RSpec.describe 'GardenHealth API' do
       expect(garden_health.time_of_reading).to eq(garden_health_params[:time_of_reading])
     end
 
+    it "can update a garden health record" do
+      garden_health = create(:garden_health)
+      previous_reading = garden_health.reading
+
+      garden_health_params = { reading: 10101.101 }
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      patch "/api/v1/garden_healths/#{garden_health.id}", headers: headers, params: JSON.generate(garden_health_params)
+
+      garden_health = GardenHealth.find(garden_health.id)
+      expect(response).to be_successful
+      gh = JSON.parse(response.body, symbolize_names: true)
+      gh_serializer_check(gh[:data])
+
+      expect(garden_health.reading).to_not eq(previous_reading)
+      expect(garden_health.reading).to eq(garden_health_params[:reading])
+    end
+
     def gh_serializer_check(garden_health)
       expect(garden_health).to have_key(:id)
       expect(garden_health[:id]).to be_a(String)
