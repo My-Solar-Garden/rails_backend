@@ -77,7 +77,33 @@ describe 'garden API' do
       end
 
       it 'can update an existing garden' do
-        
+        garden = create(:garden)
+        garden_params = {longitude: 100.5, latitude: 97.5, name: "Other Name", description: "it's a garden yo"}
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/gardens/#{garden.id}", headers: headers, params: JSON.generate(garden_params)
+        expect(response).to be_successful
+        updated_garden = Garden.find_by(id: garden.id)
+
+        expect(garden.description).to eq(nil)
+        expect(updated_garden.longitude).to_not eq(garden.longitude)
+        expect(updated_garden.latitude).to_not eq(garden.latitude)
+        expect(updated_garden.name).to_not eq(garden.name)
+
+        expect(updated_garden.longitude).to eq(garden_params[:longitude])
+        expect(updated_garden.latitude).to eq(garden_params[:latitude])
+        expect(updated_garden.name).to eq(garden_params[:name])
+        expect(updated_garden.description).to eq(garden_params[:description])
+      end
+
+      it 'can destroy a garden' do
+        garden = create(:garden)
+
+        expect(Garden.count).to eq(1)
+        delete "/api/v1/gardens/#{garden.id}"
+        expect(response).to be_successful
+        expect(Garden.count).to eq(0)
+        expect{Garden.find(garden.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
   end
 end
