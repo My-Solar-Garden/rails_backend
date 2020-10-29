@@ -94,7 +94,7 @@ describe 'plant API' do
         expect(plant[:attributes][:common_pests]).to be_an(String)
     end
 
-    it 'can create a new garden' do
+    it 'can create a new plant' do
       plant_params = ({
          image: 'image.url',
          name: 'plant name',
@@ -122,6 +122,19 @@ describe 'plant API' do
         expect(plant.when_to_plant).to eq(plant_params[:when_to_plant])
         expect(plant.harvest_time).to eq(plant_params[:harvest_time])
         expect(plant.common_pests).to eq(plant_params[:common_pests])
-    end
+      end
+
+      it 'can update an existing plant' do
+        plant = create(:plant)
+        plant_params = { name: 'a differnt name'}
+
+        headers = { 'CONTENT_TYPE' => 'application/json' }
+        patch "/api/v1/plants/#{plant.id}", headers: headers, params: JSON.generate(plant_params)
+        expect(response).to be_successful
+        updated_plant = Plant.find_by(id: plant.id)
+
+        expect(updated_plant.name).to_not eq(plant.name)
+        expect(updated_plant.name).to eq(plant_params[:name])
+      end
   end
 end
