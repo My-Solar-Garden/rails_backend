@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
-    provider { "Google" }
-    token { "jdaklhgu849urfonu9wr" }
+    provider { 'Google' }
+    token { '123fdf12sdsd3bkj2eb2' }
   end
 end

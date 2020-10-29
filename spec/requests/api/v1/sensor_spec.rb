@@ -12,7 +12,7 @@ RSpec.describe "Sensors" do
 
     describe 'happy paths' do
       it "can get all sensors for a garden" do
-        get "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors"
+        get "/api/v1/sensors"
 
         expect(response).to be_successful
 
@@ -52,7 +52,7 @@ RSpec.describe "Sensors" do
       end
 
       it "can get one sensor from a garden" do
-        get "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors/#{@moisture_sensor.id}"
+        get "/api/v1/sensors/#{@moisture_sensor.id}"
 
         expect(response).to be_successful
 
@@ -97,7 +97,7 @@ RSpec.describe "Sensors" do
                        }
          headers = {"CONTENT_TYPE" => "application/json"}
 
-         post "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors", headers: headers, params: JSON.generate(sensor_params)
+         post "/api/v1/sensors", headers: headers, params: JSON.generate(sensor_params)
 
          expect(response).to be_successful
 
@@ -148,7 +148,7 @@ RSpec.describe "Sensors" do
                        }
          headers = {"CONTENT_TYPE" => "application/json"}
 
-         patch "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors/#{@moisture_sensor.id}", headers: headers, params: JSON.generate(sensor_params)
+         patch "/api/v1/sensors/#{@moisture_sensor.id}", headers: headers, params: JSON.generate(sensor_params)
 
          expect(response).to be_successful
 
@@ -195,7 +195,7 @@ RSpec.describe "Sensors" do
       it "can destroy one sensor from a garden" do
         expect(Sensor.count).to eq(2)
 
-        delete "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors/#{@moisture_sensor.id}"
+        delete "/api/v1/sensors/#{@moisture_sensor.id}"
 
         expect(response).to be_successful
         expect(Sensor.count).to eq(1)
@@ -213,20 +213,20 @@ RSpec.describe "Sensors" do
                        }
          headers = {"CONTENT_TYPE" => "application/json"}
 
-         post "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors", headers: headers, params: JSON.generate(sensor_params)
+         post "/api/v1/sensors", headers: headers, params: JSON.generate(sensor_params)
 
          expect(Sensor.count).to eq(2)
          expect(response.body).to eq("")
       end
 
       it "returns nil when a sensor show is called with an id that doesnt exist" do
-        get "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors/24562"
+        get "/api/v1/sensors/24562"
 
         expect(response.body).to eq("")
       end
 
       it "returns nil when a delete sensor request is called with an id that doesnt exist" do
-        delete "/api/v1/users/#{@user.id}/gardens/#{@garden.id}/sensors/134651"
+        delete "/api/v1/sensors/134651"
 
         expect(response.body).to eq("")
       end
