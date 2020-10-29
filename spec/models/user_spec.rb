@@ -18,4 +18,12 @@ RSpec.describe User, type: :model do
       expect(User.count).to eq(1)
     end
   end
+
+  describe 'class-methods' do
+    it '#exists()' do
+      user = create(:user)
+      expect(User.exists?(user.id)).to eq(true)
+      expect(User.exists?(999999)).to eq(false)
+    end
+  end
 end
