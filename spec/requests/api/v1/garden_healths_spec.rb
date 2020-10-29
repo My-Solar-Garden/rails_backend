@@ -102,4 +102,44 @@ RSpec.describe 'GardenHealth API' do
       expect(garden_health[:attributes][:time_of_reading]).to be_a(String)
     end
   end
+
+  describe "sad-paths" do
+    it "index - return a 204 if no garden_health record exists" do
+      get '/api/v1/garden_healths'
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+    end
+
+    it "show - return a 204 if garden_health record cannot be found" do
+      get '/api/v1/garden_healths/99999'
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+    end
+
+    it "create - return a 204 if wrong params given" do
+      post '/api/v1/garden_healths'
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+    end
+
+    it "update - return a 204 if wrong params given" do
+      id = create(:garden_health).id
+      garden_health_params = { reading: 'a reading cannot be a string' }
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      patch "/api/v1/garden_healths/#{id}", headers: headers, params: JSON.generate(garden_health_params)
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+
+      patch "/api/v1/garden_healths/99999"
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+    end
+
+    it "destroy - return a 204 if garden_health record cannot be found" do
+      delete '/api/v1/garden_healths/99999'
+      expect(response).to be_successful
+      expect(response.status).to eq(204)
+    end
+  end
 end
