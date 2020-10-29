@@ -9,4 +9,7 @@ class PlantSerializer
   attributes :when_to_plant
   attributes :harvest_time
   attributes :common_pests
+  
+  has_many :garden_plants
+  has_many :gardens, through: :garden_plants
 end
