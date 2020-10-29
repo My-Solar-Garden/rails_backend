@@ -19,7 +19,7 @@ class Api::V1::SensorsController < ApplicationController
     render json: SensorSerializer.new(Sensor.update(params[:id], sensor_params))
   end
 
-  def delete
+  def destroy
     return nil if !Sensor.exists?(params[:id])
     Sensor.destroy(params[:id])
   end

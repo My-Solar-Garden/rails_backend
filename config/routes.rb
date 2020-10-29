@@ -4,12 +4,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users do
         resources :gardens do
-          # Sensors
-          get '/sensors', to: 'sensors#index'
-          get '/sensors/:id', to: 'sensors#show'
-          post '/sensors', to: 'sensors#create'
-          patch '/sensors/:id', to: 'sensors#update'
-          delete '/sensors/:id', to: 'sensors#delete'
+          resources :sensors do
+          end
         end
       end
     end
