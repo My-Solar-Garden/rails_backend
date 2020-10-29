@@ -4,6 +4,7 @@ RSpec.describe GardenHealth, type: :model do
   describe 'valdations' do
     it { should validate_presence_of :reading_type }
     it { should validate_presence_of :reading }
+    it { should validate_numericality_of :reading }
   end
 
   describe 'relationships' do
