@@ -106,4 +106,36 @@ describe 'garden API' do
         expect{Garden.find(garden.id)}.to raise_error(ActiveRecord::RecordNotFound)
       end
   end
+
+  describe 'sad paths' do
+   it 'index - returns a 204 if query entered wrong' do
+     get '/api/v1/gardens'
+     expect(response).to be_successful
+     expect(response.status).to eq(204)
+   end
+
+   it 'show - returns a 204 if query entered wrong' do
+     get "/api/v1/gardens/99999"
+     expect(response).to be_successful
+     expect(response.status).to eq(204)
+   end
+
+   it 'create - returns a 204 if query entered wrong' do
+     post "/api/v1/gardens"
+     expect(response).to be_successful
+     expect(response.status).to eq(204)
+   end
+
+   it 'update - returns a 204 if query entered wrong' do
+     patch "/api/v1/gardens/999999"
+     expect(response).to be_successful
+     expect(response.status).to eq(204)
+   end
+
+   it 'delete - returns a 204 if query entered wrong' do
+     delete "/api/v1/gardens/999999"
+     expect(response).to be_successful
+     expect(response.status).to eq(204)
+   end
+  end
 end
