@@ -219,6 +219,19 @@ RSpec.describe "Sensors" do
          expect(response.body).to eq("")
       end
 
+      it "cannot update a sensor for a garden with a bad param" do
+        expect(Sensor.count).to eq(2)
+
+        sensor_params = {
+                         max_threshold: "hello"
+                       }
+         headers = {"CONTENT_TYPE" => "application/json"}
+
+         patch "/api/v1/sensors/#{@moisture_sensor.id}", headers: headers, params: JSON.generate(sensor_params)
+
+         expect(response.body).to eq("")
+      end
+
       it "returns nil when a sensor show is called with an id that doesnt exist" do
         get "/api/v1/sensors/24562"
 

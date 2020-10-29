@@ -16,7 +16,9 @@ class Api::V1::SensorsController < ApplicationController
 
   def update
     return nil if !Sensor.exists?(params[:id])
-    render json: SensorSerializer.new(Sensor.update(params[:id], sensor_params))
+    updated_sensor = Sensor.find(params[:id])
+    updated_sensor.attributes = sensor_params
+    render json: SensorSerializer.new(updated_sensor) if updated_sensor.save
   end
 
   def destroy
