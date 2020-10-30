@@ -8,7 +8,7 @@ describe "Plant search" do
     create(:plant, name: "Parsnips")
     create(:plant, name: "Celery")
 
-    get '/api/v1/plants/search?name=TOM'
+    get '/api/v1/plants/search?term=TOM'
     expect(response).to be_successful
 
     plants_with_tom = JSON.parse(response.body, symbolize_names: true)
