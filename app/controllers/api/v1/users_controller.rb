@@ -28,6 +28,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :provider, :token, :refresh_token)
+    params.permit(:email, :provider, :token, :refresh_token, :uid)
   end
 end
