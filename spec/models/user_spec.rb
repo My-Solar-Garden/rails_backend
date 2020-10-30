@@ -5,6 +5,7 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of :email }
     it { should validate_presence_of :provider }
     it { should validate_presence_of :token }
+    it { should validate_presence_of :uid }
   end
 
   describe 'relationships' do
