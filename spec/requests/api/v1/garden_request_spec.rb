@@ -75,6 +75,7 @@ describe 'garden API' do
         expect(garden.longitude).to eq(garden_params[:longitude])
         expect(garden.latitude).to eq(garden_params[:latitude])
         expect(garden.name).to eq(garden_params[:name])
+        expect(user.gardens.first).to eq(garden)
       end
 
       it 'can update an existing garden' do
