@@ -63,12 +63,14 @@ describe 'garden API' do
       end
 
       it 'can create a new garden' do
-        garden_params = {longitude: 100.5, latitude: 97.5, name: "Garden 1", private: false, description: "it's a garden, what else do you want to know?"}
+        user = create(:user)
+        garden_params = {user_id: user.id, longitude: 100.5, latitude: 97.5, name: "Garden 1", private: false, description: "it's a garden, what else do you want to know?"}
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
 
         garden = Garden.last
+        user.gardens << garden
         expect(response).to be_successful
         expect(garden.longitude).to eq(garden_params[:longitude])
         expect(garden.latitude).to eq(garden_params[:latitude])
@@ -120,7 +122,8 @@ describe 'garden API' do
    end
 
    it 'create - returns a 204 if query entered wrong' do
-     post "/api/v1/gardens"
+     user = create(:user)
+     post "/api/v1/gardens?user_id=#{user.id}"
      expect(response).to be_successful
      expect(response.status).to eq(204)
    end
