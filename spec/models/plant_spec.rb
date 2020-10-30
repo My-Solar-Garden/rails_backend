@@ -18,6 +18,17 @@ RSpec.describe Plant, type: :model do
     it { should have_many(:gardens).through(:garden_plants) }
   end
 
+  describe 'class methods' do
+    it "can search by name" do 
+      p1 = create(:plant, name: "Tomato")
+      p2 = create(:plant, name: "Green Tomato")
+      p3 = create(:plant, name: "Onion")
+      p4 = create(:plant, name: "Parsnips")
+      p5 = create(:plant, name: "Celery")
+      expect(Plant.search('tom')).to eq([p1, p2])
+    end
+  end
+
   describe 'creation' do
     it 'can create a new plant' do
       Plant.create!(
