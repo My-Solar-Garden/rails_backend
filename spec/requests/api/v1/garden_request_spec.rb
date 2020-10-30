@@ -18,6 +18,14 @@ describe 'garden API' do
         expect(garden).to have_key(:type)
         expect(garden[:type]).to be_an(String)
 
+        expect(garden).to have_key(:relationships)
+        expect(garden[:relationships]).to be_a(Hash)
+        expect(garden[:relationships]).to have_key(:user_gardens)
+        expect(garden[:relationships]).to have_key(:users)
+        expect(garden[:relationships]).to have_key(:sensors)
+        expect(garden[:relationships]).to have_key(:garden_plants)
+        expect(garden[:relationships]).to have_key(:plants)
+
         expect(garden).to have_key(:attributes)
         expect(garden[:attributes]).to be_a(Hash)
 
