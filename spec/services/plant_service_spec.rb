@@ -4,7 +4,6 @@ RSpec.describe PlantService do
     plants = PlantService.all_plants
     expect(plants).to be_an Array
     plant_data = plants.first
-    require 'pry'; binding.pry
     expect(plant_data).to have_key :image_url
     expect(plant_data[:image_url]).to be_a(String)
     expect(plant_data).to have_key :name
