@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  validates :email, :provider, :token, presence: true
+  validates :email, :provider, :token, :uid, presence: true
 
   has_many :user_gardens
   has_many :gardens, through: :user_gardens
