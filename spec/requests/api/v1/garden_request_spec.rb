@@ -63,13 +63,12 @@ describe 'garden API' do
       end
 
       it 'can create a new garden' do
-        garden_params = {longitude: 100.5, latitude: 97.5, name: "Garden 1", description: "it's a garden, what else do you want to know?"}
+        garden_params = {longitude: 100.5, latitude: 97.5, name: "Garden 1", private: false, description: "it's a garden, what else do you want to know?"}
 
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
 
         garden = Garden.last
-
         expect(response).to be_successful
         expect(garden.longitude).to eq(garden_params[:longitude])
         expect(garden.latitude).to eq(garden_params[:latitude])
@@ -78,7 +77,7 @@ describe 'garden API' do
 
       it 'can update an existing garden' do
         garden = create(:garden)
-        garden_params = {longitude: 100.5, latitude: 97.5, name: "Other Name", description: "it's a garden yo"}
+        garden_params = {longitude: 100.5, latitude: 97.5, name: "Other Name", private: false, description: "it's a garden yo"}
 
         headers = { 'CONTENT_TYPE' => 'application/json' }
         patch "/api/v1/gardens/#{garden.id}", headers: headers, params: JSON.generate(garden_params)
