@@ -9,7 +9,7 @@ RSpec.describe UserGarden, type: :model do
   describe 'creation' do
     it 'can create user garden' do
       user = User.create!(email: 'test@gmail.com', provider: 'google', token: '1234')
-      user.gardens.create!(latitude: 1.5, longitude: 1.5, name: 'Garden 1')
+      user.gardens.create!(latitude: 1.5, longitude: 1.5, name: 'Garden 1', private: false)
       expect(UserGarden.count).to eq(1)
     end
   end

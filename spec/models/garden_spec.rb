@@ -5,6 +5,7 @@ RSpec.describe Garden, type: :model do
     it { should validate_presence_of :latitude }
     it { should validate_presence_of :longitude }
     it { should validate_presence_of :name }
+    it { should allow_value(%w(true false)).for(:private) }
   end
 
   describe 'relationships' do
@@ -17,7 +18,7 @@ RSpec.describe Garden, type: :model do
 
   describe 'creation' do
     it 'can make a new user' do
-      Garden.create!(latitude: 1.5, longitude: 1.5, name: 'Garden 1')
+      Garden.create!(latitude: 1.5, longitude: 1.5, name: 'Garden 1', private: false)
       expect(Garden.count).to eq(1)
     end
   end
