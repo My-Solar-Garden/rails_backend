@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe 'GardenHealth API' do
   describe 'happy-paths' do
     it "sends a list of garden health records" do
-      create_list(:garden_health, 5)
+      garden = create(:garden).id
+      sensor = create(:sensor, :moisture_sensor, garden_id: garden).id
+      create_list(:garden_health, 5, sensor_id: sensor)
 
       get '/api/v1/garden_healths'
 
@@ -21,7 +23,9 @@ RSpec.describe 'GardenHealth API' do
     end
 
     it "can get one garden health record by its id" do
-      id = create(:garden_health).id
+      garden = create(:garden).id
+      sensor = create(:sensor, :moisture_sensor, garden_id: garden).id
+      id = create(:garden_health, sensor_id: sensor).id
 
       get "/api/v1/garden_healths/#{id}"
 
@@ -34,7 +38,8 @@ RSpec.describe 'GardenHealth API' do
     end
 
     it "can create a new garden health record" do
-      sensor = create(:sensor)
+      garden = create(:garden).id
+      sensor = create(:sensor, :moisture_sensor, garden_id: garden)
       garden_health_params = {
                               sensor_id: sensor.id,
                               reading_type: 0,
@@ -59,7 +64,9 @@ RSpec.describe 'GardenHealth API' do
     end
 
     it "can update a garden health record" do
-      garden_health = create(:garden_health)
+      garden = create(:garden).id
+      sensor = create(:sensor, :moisture_sensor, garden_id: garden).id
+      garden_health = create(:garden_health, sensor_id: sensor)
       previous_reading = garden_health.reading
 
       garden_health_params = { reading: 10101.101 }
@@ -77,7 +84,9 @@ RSpec.describe 'GardenHealth API' do
     end
 
     it "can destroy a garden health record" do
-      id = create(:garden_health).id
+      garden = create(:garden).id
+      sensor = create(:sensor, :moisture_sensor, garden_id: garden).id
+      id = create(:garden_health, sensor_id: sensor).id
 
       expect{delete "/api/v1/garden_healths/#{id}"}.to change(GardenHealth, :count).by(-1)
       expect(response).to be_successful
@@ -123,7 +132,9 @@ RSpec.describe 'GardenHealth API' do
     end
 
     it "update - return a 204 if wrong params given" do
-      id = create(:garden_health).id
+      garden = create(:garden).id
+      sensor = create(:sensor, :moisture_sensor, garden_id: garden).id
+      id = create(:garden_health, sensor_id: sensor).id
       garden_health_params = { reading: 'a reading cannot be a string' }
       headers = { "CONTENT_TYPE" => "application/json" }
 
