@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    user = User.from_onmiauth(user_params)
     return nil if !user.save
     render json: UserSerializer.new(user)
   end
