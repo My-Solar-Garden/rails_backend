@@ -3,6 +3,7 @@ class GardenSerializer
   attributes :latitude
   attributes :longitude
   attributes :name
+  attributes :description
   attributes :private
 
   has_many :user_gardens

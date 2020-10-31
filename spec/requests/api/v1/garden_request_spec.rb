@@ -38,8 +38,10 @@ describe 'garden API' do
         expect(garden[:attributes]).to have_key(:name)
         expect(garden[:attributes][:name]).to be_an(String)
 
+        expect(garden[:attributes]).to have_key(:description)
+
         expect(garden[:attributes]).to have_key(:private)
-        expect(garden[:attributes][:name]).to be_a(String)
+        expect(garden[:attributes][:private]).to be_in([true, false])
       end
     end
 
