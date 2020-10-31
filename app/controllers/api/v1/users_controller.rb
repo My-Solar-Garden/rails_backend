@@ -10,7 +10,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    user = User.from_onmiauth(user_params)
     return nil if !user.save
     render json: UserSerializer.new(user)
   end
@@ -28,6 +28,10 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :provider, :token, :refresh_token)
+    # needs to be cleaned up
+    a = params.permit(:uid, :provider)
+    b = params.require(:credentials).permit(:token, :refresh_token)
+    c = params.require(:info).permit(:email)
+    a.merge(b).merge(c)
   end
 end

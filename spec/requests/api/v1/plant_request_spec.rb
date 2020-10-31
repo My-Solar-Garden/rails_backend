@@ -18,6 +18,11 @@ describe 'plant API' do
         expect(plant).to have_key(:type)
         expect(plant[:type]).to be_an(String)
 
+        expect(plant).to have_key(:relationships)
+        expect(plant[:relationships]).to be_a(Hash)
+        expect(plant[:relationships]).to have_key(:garden_plants)
+        expect(plant[:relationships]).to have_key(:gardens)
+
         expect(plant).to have_key(:attributes)
         expect(plant[:attributes]).to be_a(Hash)
 
@@ -62,6 +67,11 @@ describe 'plant API' do
 
         expect(plant).to have_key(:type)
         expect(plant[:type]).to be_an(String)
+
+        expect(plant).to have_key(:relationships)
+        expect(plant[:relationships]).to be_a(Hash)
+        expect(plant[:relationships]).to have_key(:garden_plants)
+        expect(plant[:relationships]).to have_key(:gardens)
 
         expect(plant).to have_key(:attributes)
         expect(plant[:attributes]).to be_a(Hash)
@@ -178,5 +188,5 @@ describe 'plant API' do
      expect(response).to be_successful
      expect(response.status).to eq(204)
    end
- end 
+ end
 end

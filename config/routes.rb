@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :plants
       resources :garden_healths
-      resources :gardens
       resources :users
+      resources :gardens
+      resources :sensors
     end
   end
 end
