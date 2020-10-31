@@ -5,7 +5,7 @@ class Sensor < ApplicationRecord
   belongs_to :garden
   has_many :garden_healths
 
-  enum sensor_type: %w(moisture light)
+  enum sensor_type: %w(moisture light temperature)
 
   def search_readings_between_dates(start, stop)
     garden_healths
