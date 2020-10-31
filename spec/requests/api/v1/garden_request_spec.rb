@@ -37,6 +37,9 @@ describe 'garden API' do
 
         expect(garden[:attributes]).to have_key(:name)
         expect(garden[:attributes][:name]).to be_an(String)
+
+        expect(garden[:attributes]).to have_key(:private)
+        expect(garden[:attributes][:name]).to be_a(String)
       end
     end
 
@@ -68,6 +71,9 @@ describe 'garden API' do
         expect(garden[:attributes][:latitude]).to eq(new_garden.latitude)
         expect(garden[:attributes][:longitude]).to eq(new_garden.longitude)
         expect(garden[:attributes][:name]).to eq(new_garden.name)
+
+        expect(garden[:attributes]).to have_key(:private)
+        expect(garden[:attributes][:name]).to be_a(String)
       end
 
       it 'can create a new garden' do
@@ -81,6 +87,7 @@ describe 'garden API' do
         expect(garden.longitude).to eq(garden_params[:longitude])
         expect(garden.latitude).to eq(garden_params[:latitude])
         expect(garden.name).to eq(garden_params[:name])
+        expect(garden.private).to eq(garden_params[:private])
       end
 
       it 'can update an existing garden' do
