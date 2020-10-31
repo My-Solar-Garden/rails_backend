@@ -43,8 +43,7 @@ RSpec.describe 'GardenHealth API' do
       garden_health_params = {
                               sensor_id: sensor.id,
                               reading_type: 0,
-                              reading: 123.456,
-                              time_of_reading: "2020-10-29 03:05:41.000000000 +0000"
+                              reading: 123.456
                             }
 
       headers = { "CONTENT_TYPE" => "application/json" }
@@ -60,7 +59,6 @@ RSpec.describe 'GardenHealth API' do
       expect(garden_health.sensor_id).to eq(sensor.id)
       expect(garden_health.reading_type).to eq("moisture")
       expect(garden_health.reading).to eq(garden_health_params[:reading])
-      expect(garden_health.time_of_reading).to eq(garden_health_params[:time_of_reading])
     end
 
     it "can update a garden health record" do
@@ -107,8 +105,8 @@ RSpec.describe 'GardenHealth API' do
       expect(garden_health[:attributes][:reading_type]).to be_a(String)
       expect(garden_health[:attributes]).to have_key(:reading)
       expect(garden_health[:attributes][:reading]).to be_a(Float)
-      expect(garden_health[:attributes]).to have_key(:time_of_reading)
-      expect(garden_health[:attributes][:time_of_reading]).to be_a(String)
+      expect(garden_health[:attributes]).to have_key(:created_at)
+      expect(garden_health[:attributes][:created_at]).to be_a(String)
     end
   end
 
