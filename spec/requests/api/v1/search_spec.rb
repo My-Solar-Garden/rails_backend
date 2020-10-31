@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe "search endpoint" do
+  before :each do
+    @user = create :user
+    @garden = create(:garden)
+    @user_garden = create(:user_garden, user_id: @user.id, garden_id: @garden.id)
+    @light_sensor = create(:sensor, :light_sensor, garden_id: @garden.id)
+  end
   describe 'happy path' do
-    before :each do
-      @user = create :user
-      @garden = create(:garden)
-      @user_garden = create(:user_garden, user_id: @user.id, garden_id: @garden.id)
-      @light_sensor = create(:sensor, :light_sensor, garden_id: @garden.id)
-    end
     it 'searches a specific sensors readings between two dates' do
       start_time = DateTime.now.to_s
       searched_readings = create_list(:garden_health, 5, sensor_id: @light_sensor.id, reading_type: 1)
