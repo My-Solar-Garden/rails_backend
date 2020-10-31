@@ -11,4 +11,8 @@ FactoryBot.define do
     trait :light_sensor do
       sensor_type { 1 }
     end
+
+    trait :temperature_sensor do
+      sensor_type { 2 }
+    end
 end
