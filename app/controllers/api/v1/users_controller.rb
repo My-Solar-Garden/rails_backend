@@ -28,6 +28,10 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :provider, :token, :refresh_token, :uid)
+    # needs to be cleaned up
+    a = params.permit(:uid, :provider)
+    b = params.require(:credentials).permit(:token, :refresh_token)
+    c = params.require(:info).permit(:email)
+    a.merge(b).merge(c)
   end
 end
