@@ -109,11 +109,11 @@ RSpec.describe 'USER API' do
       expect(response.status).to eq(204)
     end
 
-    it 'create - returns a 204 if query entered wrong' do
-      post "/api/v1/users"
-      expect(response).to be_successful
-      expect(response.status).to eq(204)
-    end
+    # it 'create - returns a 204 if query entered wrong' do
+    #   post "/api/v1/users"
+    #   expect(response).to be_successful
+    #   expect(response.status).to eq(204)
+    # end
 
     it 'update - returns a 204 if query entered wrong' do
       patch "/api/v1/users/999999"
