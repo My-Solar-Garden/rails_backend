@@ -86,7 +86,6 @@ describe 'garden API' do
         post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
 
         garden = Garden.last
-        # user.gardens << garden
         expect(response).to be_successful
         expect(garden.longitude).to eq(garden_params[:longitude])
         expect(garden.latitude).to eq(garden_params[:latitude])
