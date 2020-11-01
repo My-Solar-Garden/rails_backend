@@ -11,7 +11,7 @@ class Api::V1::GardensController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
-    new_garden = user.gardens.new(garden_params)
+    new_garden = user.gardens.create(garden_params)
     render json: GardenSerializer.new(new_garden) if new_garden.save
   end
 
