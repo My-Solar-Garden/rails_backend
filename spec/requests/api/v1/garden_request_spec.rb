@@ -85,14 +85,16 @@ describe 'garden API' do
         headers = {"CONTENT_TYPE" => "application/json"}
         post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
 
-        garden = Garden.last
-        user.gardens << garden
+        new_garden = Garden.last
         expect(response).to be_successful
-        expect(garden.longitude).to eq(garden_params[:longitude])
-        expect(garden.latitude).to eq(garden_params[:latitude])
-        expect(garden.name).to eq(garden_params[:name])
-        expect(user.gardens.first).to eq(garden)
-        expect(garden.private).to eq(garden_params[:private])
+        expect(new_garden.longitude).to eq(garden_params[:longitude])
+        expect(new_garden.latitude).to eq(garden_params[:latitude])
+        expect(new_garden.name).to eq(garden_params[:name])
+        expect(new_garden.private).to eq(garden_params[:private])
+        expect(user.gardens.last).to eq(new_garden)
+
+        user_garden = UserGarden.last
+        expect(user_garden.garden_id).to eq(new_garden.id)
       end
 
       it 'can update an existing garden' do
