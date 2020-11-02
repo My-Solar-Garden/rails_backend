@@ -16,7 +16,6 @@ class Garden < ApplicationRecord
     plant = Plant.new(plant_params)
     if plant.save
       GardenPlant.create!(garden: self, plant: plant, planted_date: Date.today)
-      require 'pry'; binding.pry
     end
   end
 end
