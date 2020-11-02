@@ -45,7 +45,7 @@ RSpec.describe Garden, type: :model do
         harvest_time: 'time to harvest',
         common_pests: 'common pests for plant',
       }
-      garden.create_and_add_plant(plant_params)
+      garden.create_and_add_plant('12', plant_params)
       expect(garden.plants.count).to eq(1)
       expect(garden.plants.first.name).to eq(plant_params[:name])
       expect(garden.plants.first.image).to eq(plant_params[:image])
@@ -56,6 +56,7 @@ RSpec.describe Garden, type: :model do
       expect(garden.plants.first.water_requirements).to eq(plant_params[:water_requirements])
       expect(garden.plants.first.harvest_time).to eq(plant_params[:harvest_time])
       expect(garden.plants.first.common_pests).to eq(plant_params[:common_pests])
+      expect(garden.plants.first.id).to eq(12)
     end
   end
 end
