@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/garden_healths/search', to: 'search#index'
+      namespace :plants do 
+        get '/search', to: 'search#index'
+      end
       resources :plants
       resources :garden_healths
       resources :users

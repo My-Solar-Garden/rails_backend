@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe "Plant search" do
   it "can get list of plants with a search term" do
-    get '/api/v1/plants/search?term=TOM'
+    get '/api/v1/plants/search?search_term=TOM'
     expect(response).to be_successful
-
+    require 'pry'; binding.pry
     plants_with_tom = JSON.parse(response.body, symbolize_names: true)
     expect(plants_with_tom).to be_a Hash
 

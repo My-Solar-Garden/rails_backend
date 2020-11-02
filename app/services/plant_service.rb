@@ -3,6 +3,10 @@ class PlantService
     to_json('/plants')
   end
 
+  def self.search(search_term)
+    to_json('/plants/search', { search_term: search_term })
+  end
+
   def self.to_json(url, params = {})
     response = conn.get(url) do |f|
       f.params = params
