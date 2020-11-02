@@ -12,7 +12,8 @@ describe 'Gardens' do
       water_requirements: 'water needed for plant',
       when_to_plant: 'when to plant',
       harvest_time: 'time to harvest',
-      common_pests: 'common pests for plant'
+      common_pests: 'common pests for plant',
+      plant_id: '12'
     }
     headers = {"CONTENT_TYPE" => "application/json"}
     post "/api/v1/gardens/#{garden.id}/plants", headers: headers, params: JSON.generate(plant_params)
