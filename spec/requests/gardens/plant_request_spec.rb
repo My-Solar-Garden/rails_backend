@@ -53,7 +53,7 @@ describe 'Gardens' do
     post "/api/v1/gardens/#{garden.id}/plants", headers: headers, params: JSON.generate(plant_params)
 
     plant = Plant.first
-    require 'pry'; binding.pry
+
     expect(response).to be_successful
     expect(plant.image).to eq(plant_params[:image])
     expect(plant.name).to eq(plant_params[:name])
