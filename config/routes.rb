@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       resources :plants
       resources :garden_healths
       resources :users
+      namespace :gardens do 
+        post '/:id/plants', to: 'plants#create'
+      end
       resources :gardens
       resources :sensors
     end
