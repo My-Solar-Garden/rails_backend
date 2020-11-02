@@ -28,8 +28,8 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    if params[:action] = 'update'
-      params.permit(:id, :email)
+    if params[:update_user]
+      params.require(:update_user).permit(:email)
     else
       a = params.permit(:uid, :provider)
       b = params.require(:credentials).permit(:token, :refresh_token)
