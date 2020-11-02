@@ -1,6 +1,10 @@
 class PlantService
   def self.all_plants
-    to_json('/plants')
+    to_json('/api/v1/plants')
+  end
+
+  def self.search(search_term)
+    to_json('/api/v1/plants/search', { search_term: search_term })
   end
 
   def self.to_json(url, params = {})

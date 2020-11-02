@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: rails_backend_production
-  username: rails_backend
-  password: <%= ENV['RAILS_BACKEND_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST_NAME']%>
+  database: <%= ENV['DATABASE_SCHEMA']%>
+  username: <%= ENV['DATABASE_USER_NAME']%>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
