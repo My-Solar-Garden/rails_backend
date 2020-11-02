@@ -10,8 +10,9 @@ class Api::V1::SensorsController < ApplicationController
   end
 
   def create
-    new_sensor = Sensor.new(sensor_params)
-    render json: SensorSerializer.new(new_sensor) if new_sensor.save
+    garden = Garden.find(sensor_params[:garden_id])
+    new_sensor = garden.sensors.create(sensor_params)
+    render json: SensorSerializer.new(new_sensor) 
   end
 
   def update
