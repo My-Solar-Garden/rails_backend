@@ -45,87 +45,115 @@ describe 'garden API' do
       end
     end
 
-      it 'can return a garden by its id' do
-        new_garden = create(:garden, longitude: 100.100, latitude: 95.95)
-        get "/api/v1/gardens/#{new_garden.id}"
-        expect(response).to be_successful
+    it 'can return a garden by its id' do
+      new_garden = create(:garden, longitude: 100.100, latitude: 95.95)
+      get "/api/v1/gardens/#{new_garden.id}"
+      expect(response).to be_successful
 
-        garden = JSON.parse(response.body, symbolize_names: true)[:data]
+      garden = JSON.parse(response.body, symbolize_names: true)[:data]
 
-        expect(garden).to have_key(:id)
-        expect(garden[:id]).to be_an(String)
+      expect(garden).to have_key(:id)
+      expect(garden[:id]).to be_an(String)
 
-        expect(garden).to have_key(:type)
-        expect(garden[:type]).to be_an(String)
+      expect(garden).to have_key(:type)
+      expect(garden[:type]).to be_an(String)
 
-        expect(garden).to have_key(:attributes)
-        expect(garden[:attributes]).to be_a(Hash)
+      expect(garden).to have_key(:attributes)
+      expect(garden[:attributes]).to be_a(Hash)
 
-        expect(garden[:attributes]).to have_key(:latitude)
-        expect(garden[:attributes][:latitude]).to be_an(Float)
+      expect(garden[:attributes]).to have_key(:latitude)
+      expect(garden[:attributes][:latitude]).to be_an(Float)
 
-        expect(garden[:attributes]).to have_key(:longitude)
-        expect(garden[:attributes][:longitude]).to be_an(Float)
+      expect(garden[:attributes]).to have_key(:longitude)
+      expect(garden[:attributes][:longitude]).to be_an(Float)
 
-        expect(garden[:attributes]).to have_key(:name)
-        expect(garden[:attributes][:name]).to be_an(String)
+      expect(garden[:attributes]).to have_key(:name)
+      expect(garden[:attributes][:name]).to be_an(String)
 
-        expect(garden[:attributes][:latitude]).to eq(new_garden.latitude)
-        expect(garden[:attributes][:longitude]).to eq(new_garden.longitude)
-        expect(garden[:attributes][:name]).to eq(new_garden.name)
+      expect(garden[:attributes][:latitude]).to eq(new_garden.latitude)
+      expect(garden[:attributes][:longitude]).to eq(new_garden.longitude)
+      expect(garden[:attributes][:name]).to eq(new_garden.name)
 
-        expect(garden[:attributes]).to have_key(:private)
-        expect(garden[:attributes][:name]).to be_a(String)
-      end
+      expect(garden[:attributes]).to have_key(:private)
+      expect(garden[:attributes][:name]).to be_a(String)
+    end
 
-      it 'can create a new garden' do
-        user = create(:user)
-        garden_params = {user_id: user.id, longitude: 100.5, latitude: 97.5, name: "Garden 1", private: false, description: "it's a garden, what else do you want to know?"}
+    it 'can create a new garden' do
+      user = create(:user)
+      garden_params = {user_id: user.id, longitude: 100.5, latitude: 97.5, name: "Garden 1", private: false, description: "it's a garden, what else do you want to know?"}
 
-        headers = {"CONTENT_TYPE" => "application/json"}
-        post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
 
-        new_garden = Garden.last
-        expect(response).to be_successful
-        expect(new_garden.longitude).to eq(garden_params[:longitude])
-        expect(new_garden.latitude).to eq(garden_params[:latitude])
-        expect(new_garden.name).to eq(garden_params[:name])
-        expect(new_garden.private).to eq(garden_params[:private])
-        expect(user.gardens.last).to eq(new_garden)
+      new_garden = Garden.last
+      expect(response).to be_successful
+      expect(new_garden.longitude).to eq(garden_params[:longitude])
+      expect(new_garden.latitude).to eq(garden_params[:latitude])
+      expect(new_garden.name).to eq(garden_params[:name])
+      expect(new_garden.private).to eq(garden_params[:private])
+      expect(user.gardens.last).to eq(new_garden)
 
-        user_garden = UserGarden.last
-        expect(user_garden.garden_id).to eq(new_garden.id)
-      end
+      user_garden = UserGarden.last
+      expect(user_garden.garden_id).to eq(new_garden.id)
+    end
 
-      it 'can update an existing garden' do
+    it 'can update an existing garden' do
+      garden = create(:garden)
+      garden_params = {longitude: 100.5, latitude: 97.5, name: "Other Name", private: false, description: "it's a garden yo"}
+
+      headers = { 'CONTENT_TYPE' => 'application/json' }
+      patch "/api/v1/gardens/#{garden.id}", headers: headers, params: JSON.generate(garden_params)
+      expect(response).to be_successful
+      updated_garden = Garden.find_by(id: garden.id)
+
+      expect(garden.description).to eq(nil)
+      expect(updated_garden.longitude).to_not eq(garden.longitude)
+      expect(updated_garden.latitude).to_not eq(garden.latitude)
+      expect(updated_garden.name).to_not eq(garden.name)
+
+      expect(updated_garden.longitude).to eq(garden_params[:longitude])
+      expect(updated_garden.latitude).to eq(garden_params[:latitude])
+      expect(updated_garden.name).to eq(garden_params[:name])
+      expect(updated_garden.description).to eq(garden_params[:description])
+    end
+
+    it 'can destroy a garden' do
+      garden = create(:garden)
+
+      expect(Garden.count).to eq(1)
+      delete "/api/v1/gardens/#{garden.id}"
+      expect(response).to be_successful
+      expect(Garden.count).to eq(0)
+      expect{Garden.find(garden.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    describe 'relationship endpoint' do
+      it "returns all sensors related to a garden" do
         garden = create(:garden)
-        garden_params = {longitude: 100.5, latitude: 97.5, name: "Other Name", private: false, description: "it's a garden yo"}
+        s1, s2 = create_list(:sensor, 2, :moisture_sensor, garden: garden)
 
-        headers = { 'CONTENT_TYPE' => 'application/json' }
-        patch "/api/v1/gardens/#{garden.id}", headers: headers, params: JSON.generate(garden_params)
+        get "/api/v1/gardens/#{garden.id}/sensors"
         expect(response).to be_successful
-        updated_garden = Garden.find_by(id: garden.id)
 
-        expect(garden.description).to eq(nil)
-        expect(updated_garden.longitude).to_not eq(garden.longitude)
-        expect(updated_garden.latitude).to_not eq(garden.latitude)
-        expect(updated_garden.name).to_not eq(garden.name)
+        sensors = JSON.parse(response.body, symbolize_names: true)
 
-        expect(updated_garden.longitude).to eq(garden_params[:longitude])
-        expect(updated_garden.latitude).to eq(garden_params[:latitude])
-        expect(updated_garden.name).to eq(garden_params[:name])
-        expect(updated_garden.description).to eq(garden_params[:description])
+        expect(sensors).to be_a(Hash)
+        expect(sensors).to have_key(:data)
+        expect(sensors[:data]).to be_an(Array)
+        expect(sensors[:data].count).to eq(2)
+        expect(sensors[:data].first).to have_key(:id)
+        expect([s1.id.to_s, s2.id.to_s].include? sensors[:data].first[:id]).to be_truthy
+        expect([s1.id.to_s, s2.id.to_s].include? sensors[:data].last[:id]).to be_truthy
+        expect(sensors[:data].first).to have_key(:type)
+        expect(sensors[:data].first).to have_key(:attributes)
+        expect(sensors[:data].first[:attributes]).to have_key(:min_threshold)
+        expect(sensors[:data].first[:attributes]).to have_key(:max_threshold)
+        expect(sensors[:data].first[:attributes]).to have_key(:sensor_type)
+        expect(sensors[:data].first).to have_key(:relationships)
+        expect(sensors[:data].first[:relationships]).to have_key(:garden)
+        expect(sensors[:data].first[:relationships]).to have_key(:garden_healths)
       end
-
-      it 'can destroy a garden' do
-        garden = create(:garden)
-
-        expect(Garden.count).to eq(1)
-        delete "/api/v1/gardens/#{garden.id}"
-        expect(response).to be_successful
-        expect(Garden.count).to eq(0)
-        expect{Garden.find(garden.id)}.to raise_error(ActiveRecord::RecordNotFound)
-      end
+    end
   end
 
   describe 'sad paths' do

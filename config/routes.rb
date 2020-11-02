@@ -6,7 +6,9 @@ Rails.application.routes.draw do
       resources :plants
       resources :garden_healths
       resources :users
-      resources :gardens
+      resources :gardens do
+        get :sensors, to: "gardens/sensors#index"
+      end
       resources :sensors
     end
   end
