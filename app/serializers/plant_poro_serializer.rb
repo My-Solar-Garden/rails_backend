@@ -1,4 +1,4 @@
-class PlantSerializer
+class PlantPoroSerializer
   include FastJsonapi::ObjectSerializer
   attributes :image
   attributes :name
@@ -11,6 +11,4 @@ class PlantSerializer
   attributes :common_pests
   attributes :id
   
-  has_many :garden_plants
-  has_many :gardens, through: :garden_plants
 end
