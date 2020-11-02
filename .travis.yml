@@ -19,5 +19,5 @@ deploy:
   app: rails_backend
   on:
     repo: My-Solar-Garden/rails_backend
-    branch: travis
+    branch: main
   skip_cleanup: 'true'
