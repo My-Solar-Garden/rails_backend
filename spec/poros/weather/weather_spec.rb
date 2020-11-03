@@ -327,3 +327,6 @@ describe Weather do
         expect(weather.daily.first.temperature).to be_a(Numeric)
     end
 end
+
+# postman:
+# https://weather-microservice-api.herokuapp.com/api/v1/forecast?lat=39.74&lon=-104.98
