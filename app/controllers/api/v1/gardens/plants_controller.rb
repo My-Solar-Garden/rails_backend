@@ -5,7 +5,6 @@ class Api::V1::Gardens::PlantsController < ApplicationController
       garden.add_plant(Plant.find(params[:plant_id]))
     else
       garden.create_and_add_plant(params[:plant_id], plant_params)
-      require 'pry'; binding.pry
     end
   end
 
