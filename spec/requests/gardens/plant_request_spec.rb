@@ -13,7 +13,7 @@ describe 'Gardens' do
       when_to_plant: 'when to plant',
       harvest_time: 'time to harvest',
       common_pests: 'common pests for plant',
-      plant_id: '14'
+      plant_id: '12'
     }
     headers = {"CONTENT_TYPE" => "application/json"}
     post "/api/v1/gardens/#{garden.id}/plants", headers: headers, params: JSON.generate(plant_params)
@@ -34,7 +34,7 @@ describe 'Gardens' do
     expect(garden.plants).to eq([plant])
   end
 
-  it "can add a plant if it does exist in the database" do 
+  it "can add a plant if it doesn't exist in the database" do 
     garden = create(:garden)
     db_plant = create(:plant)
     plant_params = { 

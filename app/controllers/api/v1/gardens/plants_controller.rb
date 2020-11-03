@@ -4,7 +4,7 @@ class Api::V1::Gardens::PlantsController < ApplicationController
     if Plant.exists?(params[:plant_id])
       garden.add_plant(Plant.find(params[:plant_id]))
     else
-      garden.create_and_add_plant(params[:plant_id], plant_params)
+      garden.create_and_add_plant(plant_params)
     end
   end
 
