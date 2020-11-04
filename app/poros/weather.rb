@@ -1,6 +1,7 @@
 class Weather
-  attr_reader :temperature, :humidity, :description, :daily
+  attr_reader :id, :temperature, :humidity, :description, :daily
   def initialize(data)
+    @id = nil
     @temperature = data[:current][:temp]
     @humidity = data[:current][:humidity]
     @description = data[:current][:weather][0][:description]
