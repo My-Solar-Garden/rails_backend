@@ -119,6 +119,12 @@ describe 'garden API' do
 
     it 'can destroy a garden' do
       garden = create(:garden)
+      user = create(:user)
+      light_sensor = create(:sensor, sensor_type: 1, garden_id: garden.id)
+      plant = create(:plant)
+
+      garden.user_gardens.create(user_id: user.id)
+      garden.add_plant(plant)
 
       expect(Garden.count).to eq(1)
       delete "/api/v1/gardens/#{garden.id}"
