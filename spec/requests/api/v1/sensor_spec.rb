@@ -193,10 +193,10 @@ RSpec.describe "Sensors" do
       end
 
       it "can destroy one sensor from a garden" do
+        create(:garden_health, sensor: @moisture_sensor)
+        
         expect(Sensor.count).to eq(2)
-
         delete "/api/v1/sensors/#{@moisture_sensor.id}"
-
         expect(response).to be_successful
         expect(Sensor.count).to eq(1)
       end

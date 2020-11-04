@@ -149,6 +149,8 @@ describe 'plant API' do
 
       it 'can destroy a plant' do
         plant = create(:plant)
+        garden = create(:garden)
+        garden.add_plant(plant)
 
         expect(Plant.count).to eq(1)
         delete "/api/v1/plants/#{plant.id}"
