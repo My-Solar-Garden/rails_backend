@@ -8,7 +8,6 @@ RSpec.describe "Sensors" do
       @user_garden = create(:user_garden, user_id: @user.id, garden_id: @garden.id)
       @moisture_sensor = create(:sensor, :moisture_sensor, garden_id: @garden.id)
       @light_sensor = create(:sensor, :light_sensor, garden_id: @garden.id)
-      @temperature_sensor = create(:sensor, :temperature_sensor, garden_id: @garden.id)
     end
 
     describe 'happy paths' do
@@ -248,14 +247,31 @@ RSpec.describe "Sensors" do
 
     describe 'relationships' do
       it "can return all the readings related to a sensor" do
-        create(:garden_health, 3, sensor: @temperature_sensor)
+        temperature_sensor = create(:sensor, :temperature_sensor, garden_id: @garden.id)
 
-        get "api/v1/sensors/#{@temperature_sensor.id}/garden_healths"
+        create_list(:garden_health, 3, sensor: temperature_sensor)
+
+        get "/api/v1/sensors/#{temperature_sensor.id}/garden_healths"
         expect(response).to be_successful
 
-        readings = JSON.parse(response.body, symbolize_names: true)
+        readings = JSON.parse(response.body, symbolize_names: true)[:data]
 
         expect(readings.size).to eq(3)
+      end
+
+      it "can return the last reading from a sensor" do
+        temperature_sensor = create(:sensor, :temperature_sensor, garden_id: @garden.id)
+
+        create_list(:garden_health, 3, sensor: temperature_sensor)
+
+        last_reading = GardenHealth.last
+
+        get "/api/v1/sensors/#{temperature_sensor.id}/garden_healths/last"
+        expect(response).to be_successful
+
+        reading= JSON.parse(response.body, symbolize_names: true)[:data].first
+
+        expect(reading[:id]).to eq(last_reading.id.to_s)
       end
     end
   end
