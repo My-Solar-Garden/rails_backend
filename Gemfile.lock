@@ -214,6 +214,7 @@ DEPENDENCIES
   byebug
   factory_bot_rails
   faker
+  faraday
   fast_jsonapi
   json
   listen (>= 3.0.5, < 3.2)
