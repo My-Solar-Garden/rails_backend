@@ -194,7 +194,7 @@ RSpec.describe "Sensors" do
 
       it "can destroy one sensor from a garden" do
         create(:garden_health, sensor: @moisture_sensor)
-        
+
         expect(Sensor.count).to eq(2)
         delete "/api/v1/sensors/#{@moisture_sensor.id}"
         expect(response).to be_successful
@@ -242,6 +242,36 @@ RSpec.describe "Sensors" do
         delete "/api/v1/sensors/134651"
 
         expect(response.body).to eq("")
+      end
+    end
+
+    describe 'relationships' do
+      it "can return all the readings related to a sensor" do
+        temperature_sensor = create(:sensor, :temperature_sensor, garden_id: @garden.id)
+
+        create_list(:garden_health, 3, sensor: temperature_sensor)
+
+        get "/api/v1/sensors/#{temperature_sensor.id}/garden_healths"
+        expect(response).to be_successful
+
+        readings = JSON.parse(response.body, symbolize_names: true)[:data]
+
+        expect(readings.size).to eq(3)
+      end
+
+      it "can return the last reading from a sensor" do
+        temperature_sensor = create(:sensor, :temperature_sensor, garden_id: @garden.id)
+
+        create_list(:garden_health, 3, sensor: temperature_sensor)
+
+        last_reading = GardenHealth.last
+
+        get "/api/v1/sensors/#{temperature_sensor.id}/garden_healths/last"
+        expect(response).to be_successful
+
+        reading= JSON.parse(response.body, symbolize_names: true)[:data].first
+
+        expect(reading[:id]).to eq(last_reading.id.to_s)
       end
     end
   end

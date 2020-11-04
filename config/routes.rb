@@ -16,7 +16,10 @@ Rails.application.routes.draw do
         post '/:id/plants', to: 'plants#create'
       end
       resources :gardens
-      resources :sensors
+      resources :sensors do
+        get :garden_healths, to: 'sensors/garden_healths#index'
+        get '/garden_healths/last', to: 'sensors/garden_healths#last'
+      end
     end
   end
 end
