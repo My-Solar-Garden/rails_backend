@@ -87,12 +87,13 @@ RSpec.describe 'USER API' do
     end
 
     it 'can destroy a user' do
-      id = create(:user).id
+      user = create(:user)
+      garden = create(:garden)
+      user.user_gardens.create(garden_id: garden.id)
 
-      expect{ delete "/api/v1/users/#{id}" }.to change(User, :count).by(-1)
-
+      expect{ delete "/api/v1/users/#{user.id}" }.to change(User, :count).by(-1)
       expect(response).to be_successful
-      expect{User.find(id)}.to raise_error(ActiveRecord::RecordNotFound)
+      expect{User.find(user.id)}.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
