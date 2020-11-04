@@ -3,7 +3,7 @@ class Sensor < ApplicationRecord
   validates :min_threshold, :max_threshold, numericality: true
 
   belongs_to :garden
-  has_many :garden_healths
+  has_many :garden_healths, dependent: :destroy
 
   enum sensor_type: %w(moisture light temperature)
 
