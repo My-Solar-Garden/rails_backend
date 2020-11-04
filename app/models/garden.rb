@@ -12,8 +12,10 @@ class Garden < ApplicationRecord
     GardenPlant.create!(garden: self, plant: plant, planted_date: Date.today)
   end
 
-  def create_and_add_plant(plant_params)
-    plant = Plant.new(plant_params)
+  def create_and_add_plant(plant_id, plant_params)
+    plant = Plant.new(plant_params) do |plant|
+      plant.id = plant_id 
+    end
     if plant.save
       GardenPlant.create!(garden: self, plant: plant, planted_date: Date.today)
     end
