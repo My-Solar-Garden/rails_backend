@@ -589,8 +589,251 @@ Exmaple Response:
 ```
 204 No Content
 ```
+## Plants Endpoints
 
+### ```GET /plants``` - all plants
 
+Returns a JSON list of all plants as well as associated relationships.
+
+Note: Relationships may be empty if plant is new or has no gardens it's attached to yet.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/plants
+```
+
+Exmaple Response:
+```json
+{
+   "data":[
+      {
+         "id":"2",
+         "type":"plant",
+         "attributes":{
+            "image":"noimage.jpg",
+            "name":"Dandelion",
+            "species":"Taraxacum",
+            "description":"Dandelion is a plant with yellow flowers. Taraxacum officinale is the most common variety of this plant, and it grows in many parts of the world. Botanists consider dandelions to be herbs. People use the leaves, stem, flower, and root of the dandelion for medicinal purposes.",
+            "light_requirements":"They prefer full sun but will do fine in partial shade.",
+            "water_requirements":"Dandelions need a lot of water to thrive, so plan to water them regularly. However, do not water them too much. Water just enough so that the soil feels moist. Check the soil by poking your finger into it once every 2 to 3 days.",
+            "when_to_plant":"Seeds can be sown anytime from early spring to early fall. In terms of spacing, it is recommended to maintain a spacing of 6-9 inches (15-23 cm.) between plants in rows 12 inches (30 cm.) apart for dandelion seed growing",
+            "harvest_time":"No harvest data available for this plant.",
+            "common_pests":"Humans are a common pests to dandelions. They often will be sprayed with weed killer or stomped on. Often times the flower will be picked from the dandelion.",
+            "id":2
+         },
+         "relationships":{
+            "garden_plants":{
+               "data":[
+
+               ]
+            },
+            "gardens":{
+               "data":[
+
+               ]
+            }
+         }
+      },
+      {
+         "id":"42",
+         "type":"plant",
+         "attributes":{
+            "image":"harvest_helper_production/42_tarragon",
+            "name":"Tarragon",
+            "species":"",
+            "description":"Tarragon is a perennial herb with long, light green leaves and tiny greenish or yellowish white flowers. For cooking, use French tarragon. Russian tarragon can easily be mistaken for French, but Russian tarragon is coarser and less flavorful than French tarragon.",
+            "light_requirements":"Full-Part Sun",
+            "water_requirements":"Be sure to water the young plants regularly until they are fully grown so that they don't dry out.",
+            "when_to_plant":"You can tarragon mint as soon as the soil is workable in the spring.",
+            "harvest_time":"Harvest your plant regularly. Two or three plants will suffice if you regularly prune them. Tarragon is best used fresh in the summer.",
+            "common_pests":"",
+            "id":42
+         },
+         "relationships":{
+            "garden_plants":{
+               "data":[
+                  {
+                     "id":"1",
+                     "type":"garden_plant"
+                  }
+               ]
+            },
+            "gardens":{
+               "data":[
+                  {
+                     "id":"247",
+                     "type":"garden"
+                  }
+               ]
+            }
+         }
+      }
+   ]
+}
+```
+
+### ```GET /plants/:id``` - specific plant
+
+Returns a JSON of one plant that matches with ID being passed.
+
+Note: Relationships may be empty if plant is new or has no gardens it's attached to yet.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/plants/4
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "4",
+        "type": "plant",
+        "attributes": {
+            "image": "harvest_helper_production/04_carrot",
+            "name": "Carrots",
+            "species": "",
+            "description": "Carrots are a popular root vegetable that are easy to grow in sandy soil. They are resistant to most pests and diseases, and are a good late season crop that can tolerate frost. Not all carrots are orange; varieties vary in color from purple to white.",
+            "light_requirements": "Full Sun(at least 6 hours a day)",
+            "water_requirements": "Water at least one inch per week.",
+            "when_to_plant": "Plan to plant seeds outdoors 3 to 5 weeks before the last spring frost date.",
+            "harvest_time": "Carrots are mature at around 2 ½ months and ½ inch in diameter. You may harvest whenever desired maturity is reached.\r\nYou may leave mature carrots in the soil for storage if the ground will not freeze.",
+            "common_pests": "Wireworms, Flea Beetles",
+            "id": 4
+        },
+        "relationships": {
+            "garden_plants": {
+                "data": [
+                    {
+                        "id": "16",
+                        "type": "garden_plant"
+                    }
+                ]
+            },
+            "gardens": {
+                "data": [
+                    {
+                        "id": "247",
+                        "type": "garden"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+### ```POST /plants``` - create plant
+
+Creates a new plant. You will need to note that the incoming content is json and add the following to the body. Each name/value pair must be filled out. A garden will not be created with empty fields.
+
+Example Request:
+```
+POST https://solar-garden-be.herokuapp.com/api/v1/plants
+Content-Type: application/json
+
+{
+   "image": "image.url",
+   "name": "plant name",
+   "species": "plant species",
+   "description": "plant description",
+   "light_requirements": "light needed for plant",
+   "water_requirements": "water needed for plant",
+   "when_to_plant": "when to plant",
+   "harvest_time": "time to harvest",
+   "common_pests": "common pests for plant"
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "69",
+        "type": "plant",
+        "attributes": {
+            "image": "image.url",
+            "name": "plant name",
+            "species": "plant species",
+            "description": "plant description",
+            "light_requirements": "light need for plant",
+            "water_requirements": "water need for plant",
+            "when_to_plant": "when to plant",
+            "harvest_time": "time to harvest",
+            "common_pests": "common pests for plants",
+            "id": 2
+        },
+        "relationships": {
+            "garden_plants": {
+                "data": []
+            },
+            "gardens": {
+                "data": []
+            }
+        }
+    }
+}
+```
+
+### ```PATCH /plants/:id``` - update plant
+
+Updates an existing plant. One or more fields can be updated in one request, depending on what is added to the body.
+
+Example Request:
+```
+PATCH https://solar-garden-be.herokuapp.com/api/v1/plants/69
+Content-Type: application/json
+
+{
+   "description": "this plant is awesome",
+   "light_requirements": "needs lots of light",
+   "common_pests": "humans"
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "69",
+        "type": "plant",
+        "attributes": {
+            "image": "image.url",
+            "name": "plant name",
+            "species": "plant species",
+            "description": "this plant is awesome",
+            "light_requirements": "needs lots of light",
+            "water_requirements": "water need for plant",
+            "when_to_plant": "when to plant",
+            "harvest_time": "time to harvest",
+            "common_pests": "humans",
+            "id": 2
+        },
+        "relationships": {
+            "garden_plants": {
+                "data": []
+            },
+            "gardens": {
+                "data": []
+            }
+        }
+    }
+}
+```
+
+### ```DELETE /plants/:id``` - delete plant
+
+Deletes an existing plant. The return will be empty with a status code of 204 No Content.
+
+Example Request:
+```
+DELETE https://solar-garden-be.herokuapp.com/api/v1/plants/69
+```
+
+Exmaple Response:
+```
+204 No Content
+```
 
 ## Contributors
 * Alex Desjardins
