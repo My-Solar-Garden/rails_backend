@@ -1070,7 +1070,84 @@ Exmaple Response:
 ```
 204 No Content
 ```
+## Weather Endpoint
 
+### ```GET /forcast``` - return forecast for location
+
+Returns a JSON of current weather information based on coordinates.
+
+Note: GPS coordinates must be entered in as params with request (lat = latitude and lon = longitude)
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/forecast?lat=39.7392&lon=104.9903
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": null,
+        "type": "weather",
+        "attributes": {
+            "id": null,
+            "description": "clear sky",
+            "humidity": 81,
+            "temperature": 28.71,
+            "daily": [
+                {
+                    "date": "2020-11-06T04:00:00.000+00:00",
+                    "temperature": 38.41,
+                    "humidity": 60,
+                    "description": "clear sky"
+                },
+                {
+                    "date": "2020-11-07T04:00:00.000+00:00",
+                    "temperature": 42.4,
+                    "humidity": 50,
+                    "description": "clear sky"
+                },
+                {
+                    "date": "2020-11-08T04:00:00.000+00:00",
+                    "temperature": 46.89,
+                    "humidity": 43,
+                    "description": "clear sky"
+                },
+                {
+                    "date": "2020-11-09T04:00:00.000+00:00",
+                    "temperature": 46.4,
+                    "humidity": 45,
+                    "description": "clear sky"
+                },
+                {
+                    "date": "2020-11-10T04:00:00.000+00:00",
+                    "temperature": 44.55,
+                    "humidity": 52,
+                    "description": "clear sky"
+                },
+                {
+                    "date": "2020-11-11T04:00:00.000+00:00",
+                    "temperature": 49.17,
+                    "humidity": 43,
+                    "description": "few clouds"
+                },
+                {
+                    "date": "2020-11-12T04:00:00.000+00:00",
+                    "temperature": 48.38,
+                    "humidity": 38,
+                    "description": "clear sky"
+                },
+                {
+                    "date": "2020-11-13T04:00:00.000+00:00",
+                    "temperature": 48.52,
+                    "humidity": 38,
+                    "description": "clear sky"
+                }
+            ]
+        }
+    }
+}
+```
 
 ## Contributors
 * Alex Desjardins
