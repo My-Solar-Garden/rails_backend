@@ -15,12 +15,12 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
     - [POST Create user](#post-users---create-user)
     - [PATCH Update user](#patch-usersid---update-user)
     - [DELETE Destroy user](#delete-usersid---delete-user)
-  - [Garden Endpoints](#user-endpoints)
-    - [GET All gardens](#)
-    - [GET One garden](#)
-    - [POST Create garden](#)
-    - [PATCH Update garden](#)
-    - [DELETE Destroy garden](#)
+  - [Garden Endpoints](#garden-endpoints)
+    - [GET All gardens](#get-gardens---all-gardens)
+    - [GET One garden](#get-gardensid---specific-garden)
+    - [POST Create garden](#post-gardens---create-garden)
+    - [PATCH Update garden](#patch-gardensid---update-garden)
+    - [DELETE Destroy garden](#delete-gardensid---delete-garden)
   - [Contributors](#contributors)
   
 ## User Endpoints
