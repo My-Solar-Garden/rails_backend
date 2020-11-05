@@ -14,6 +14,13 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
     - [GET One user](#get-usersid---specific-user)
     - [POST Create user](#post-users---create-user)
     - [PATCH Update user](#patch-usersid---update-user)
+    - [DELETE Destroy user](#delete-usersid---delete-user)
+  - [Garden Endpoints](#user-endpoints)
+    - [GET All gardens](#)
+    - [GET One garden](#)
+    - [POST Create garden](#)
+    - [PATCH Update garden](#)
+    - [DELETE Destroy garden](#)
   - [Contributors](#contributors)
   
 ## User Endpoints
@@ -241,6 +248,348 @@ Exmaple Response:
 ```
 204 No Content
 ```
+
+## Garden Endpoints
+
+### ```GET /gardens``` - all gardens
+
+Returns a JSON list of all gardens as well as associated relationships.
+
+Note: Relationships may be empty if garden is new and has no sensors, plants, and data.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/gardens
+```
+
+Exmaple Response:
+```json
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "garden",
+            "attributes": {
+                "latitude": 97.5,
+                "longitude": 100.0,
+                "name": "Tomato Garden",
+                "description": "4x4 grid of red tomatoes",
+                "private": false
+            },
+            "relationships": {
+              "user_gardens": {
+                  "data": [
+                      {
+                          "id": "235",
+                          "type": "user_garden"
+                      }
+                  ]
+              },
+                "users": {
+                    "data": [                        {
+                            "id": "1",
+                            "type": "user"
+                        }
+                    ]
+                },
+                "sensors": {
+                    "data": [
+                        {
+                            "id": "3",
+                            "type": "sensor"
+                        }
+                    ]
+                },
+                "garden_plants": {
+                    "data": [
+                        {
+                            "id": "2",
+                            "type": "garden_plant"
+                        },
+                        {
+                            "id": "3",
+                            "type": "garden_plant"
+                        }
+                    ]
+                },
+                "plants": {
+                    "data": [
+                        {
+                            "id": "33",
+                            "type": "plant"
+                        },
+                        {
+                            "id": "33",
+                            "type": "plant"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id": "2",
+            "type": "garden",
+            "attributes": {
+                "latitude": 71.0,
+                "longitude": 25.0,
+                "name": "The Grove",
+                "description": "A simple garden",
+                "private": false
+            },
+            "relationships": {
+                "user_gardens": {
+                    "data": [
+                        {
+                            "id": "480",
+                            "type": "user_garden"
+                        }
+                    ]
+                },
+                "users": {
+                    "data": [                        {
+                            "id": "2",
+                            "type": "user"
+                        }
+                    ]
+                },
+                "sensors": {
+                    "data": [
+                        {
+                            "id": "78",
+                            "type": "sensor"
+                        },
+                        {
+                            "id": "79",
+                            "type": "sensor"
+                        }
+                    ]
+                },
+                "garden_plants": {
+                    "data": []
+                },
+                "plants": {
+                    "data": []
+                }
+            }
+        }
+    ]
+}
+```
+
+### ```GET /gardens/:id``` - specific garden
+
+Returns a JSON of one garden that matches with ID being passed.
+
+Note: Relationships may be empty if garden is new and has no sensors, plants, and data.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/gardens/1
+```
+
+Exmaple Response:
+```json
+{
+   "data":{
+      "id":"1",
+      "type":"garden",
+      "attributes":{
+         "latitude":97.5,
+         "longitude":100.0,
+         "name":"Tomato Garden",
+         "description":"4x4 grid of red tomatoes",
+         "private":false
+      },
+      "relationships":{
+         "user_gardens":{
+            "data":[
+               {
+                  "id":"235",
+                  "type":"user_garden"
+               }
+            ]
+         },
+         "users":{
+            "data":[
+               {
+                  "id":"1",
+                  "type":"user"
+               }
+            ]
+         },
+         "sensors":{
+            "data":[
+               {
+                  "id":"3",
+                  "type":"sensor"
+               }
+            ]
+         },
+         "garden_plants":{
+            "data":[
+               {
+                  "id":"2",
+                  "type":"garden_plant"
+               },
+               {
+                  "id":"3",
+                  "type":"garden_plant"
+               }
+            ]
+         },
+         "plants":{
+            "data":[
+               {
+                  "id":"33",
+                  "type":"plant"
+               },
+               {
+                  "id":"33",
+                  "type":"plant"
+               }
+            ]
+         }
+      }
+   }
+}
+```
+
+### ```POST /gardens``` - create garden
+
+Creates a new garden. You will need to note that the incoming content is json and add the following to the body. Each name/value pair must be filled out. A garden will not be created with empty fields.
+
+Example Request:
+```
+POST https://solar-garden-be.herokuapp.com/api/v1/gardens
+Content-Type: application/json
+
+{
+   "user_id": "1",
+   "longitude": 100.5,
+   "latitude": 97.5,
+   "name": "Garden",
+   "private": false,
+   "description": "It's a garden, what else do you want to know?"
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "487",
+        "type": "garden",
+        "attributes": {
+            "latitude": 97.5,
+            "longitude": 100.5,
+            "name": "Garden",
+            "description": "It's a garden, what else do you want to know?",
+            "private": false
+        },
+        "relationships": {
+            "user_gardens": {
+                "data": [
+                    {
+                        "id": "480",
+                        "type": "user_garden"
+                    }
+                ]
+            },
+            "users": {
+                "data": [
+                    {
+                        "id": "1",
+                        "type": "user"
+                    }
+                ]
+            },
+            "sensors": {
+                "data": []
+            },
+            "garden_plants": {
+                "data": []
+            },
+            "plants": {
+                "data": []
+            }
+        }
+    }
+}
+```
+
+### ```PATCH /gardens/:id``` - update garden
+
+Updates an existing garden. One or more fields can be updated in one request, depending on what is added to the body.
+
+Example Request:
+```
+PATCH https://solar-garden-be.herokuapp.com/api/v1/gardens/487
+Content-Type: application/json
+
+{
+   "longitude": 101.5,
+   "name": "Fab Gar Den"
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "487",
+        "type": "garden",
+        "attributes": {
+            "latitude": 97.5,
+            "longitude": 101.5,
+            "name": "Fab Gar Den",
+            "description": "It's a garden, what else do you want to know?",
+            "private": false
+        },
+        "relationships": {
+            "user_gardens": {
+                "data": [
+                    {
+                        "id": "480",
+                        "type": "user_garden"
+                    }
+                ]
+            },
+            "users": {
+                "data": [
+                    {
+                        "id": "1",
+                        "type": "user"
+                    }
+                ]
+            },
+            "sensors": {
+                "data": []
+            },
+            "garden_plants": {
+                "data": []
+            },
+            "plants": {
+                "data": []
+            }
+        }
+    }
+}
+```
+
+### ```DELETE /gardens/:id``` - delete garden
+
+Deletes an existing garden. The return will be empty with a status code of 204 No Content.
+
+Example Request:
+```
+DELETE https://solar-garden-be.herokuapp.com/api/v1/gardens/487
+```
+
+Exmaple Response:
+```
+204 No Content
+```
+
 
 
 ## Contributors
