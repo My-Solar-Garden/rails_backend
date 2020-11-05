@@ -14,9 +14,11 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
   
 ## User Endpoints
 
-### ```GET /users```
+### ```GET /users``` - all users
 
-Returns a JSON list of all users as well as associated relationships. Relationships may be empty if user is new and has no gardens, sensors, plants, and data.
+Returns a JSON list of all users as well as associated relationships.
+
+Note: Relationships may be empty if user is new and has no gardens, sensors, plants, and data.
 
 Example Request:
 ```
@@ -79,6 +81,57 @@ Exmaple Response:
             }
         }
     ]
+}
+```
+
+### ```GET /users/:id``` - specific user
+
+Returns a JSON of one user that matches with ID being passed.
+
+Note: Relationships may be empty if user is new and has no gardens, sensors, plants, and data.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/users/2
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "2",
+        "type": "user",
+        "attributes": {
+            "id": 2,
+            "email": "blake@example.com"
+        },
+        "relationships": {
+            "user_gardens": {
+                "data": [
+                    {
+                        "id": "479",
+                        "type": "user_garden"
+                    },
+                    {
+                        "id": "483",
+                        "type": "user_garden"
+                    }
+                ]
+            },
+            "gardens": {
+                "data": [
+                    {
+                        "id": "486",
+                        "type": "garden"
+                    },
+                    {
+                        "id": "490",
+                        "type": "garden"
+                    }
+                ]
+            }
+        }
+    }
 }
 ```
 
