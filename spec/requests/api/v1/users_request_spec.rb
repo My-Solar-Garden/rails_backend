@@ -86,6 +86,21 @@ RSpec.describe 'USER API' do
       expect(user.token).to eq(user_params[:credentials][:token])
     end
 
+    it 'can update user email from FE' do
+      user = create(:user)
+      previous_email = user.email
+      headers = {"CONTENT_TYPE" => "application/json"}
+      params = {update_user: {email: 'abc@gmail.com'}}
+      patch "/api/v1/users/#{user.id}", headers: headers, params: JSON.generate(params)
+
+      user = User.find(user.id)
+
+      expect(response).to be_successful
+
+      expect(user.email).to_not eq(previous_email)
+      expect(user.email).to eq(params[:update_user][:email])
+    end
+
     it 'can destroy a user' do
       user = create(:user)
       garden = create(:garden)
