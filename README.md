@@ -595,7 +595,7 @@ Exmaple Response:
 ```
 204 No Content
 ```
-## Plants Endpoints
+## Plant Endpoints
 
 ### ```GET /plants``` - all plants
 
