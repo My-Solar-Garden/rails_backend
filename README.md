@@ -4,12 +4,84 @@
 ![](https://img.shields.io/badge/Ruby-2.5.3-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
 [![Build Status](https://travis-ci.com/My-Solar-Garden/rails_backend.svg?branch=main)](https://travis-ci.com/My-Solar-Garden/rails_backend)
 
-This is the backend API for [My Solar Garden](https://github.com/My-Solar-Garden/front_end_rails) web application. 
+Welcome to the backend API for [My Solar Garden](https://github.com/My-Solar-Garden/front_end_rails) web application. If you need help or have a problem, please submit an issue and one of our team members will get to it as soon as possible. Currently no API key is needed for access. However, a key might be needed in the future.
+
+Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
 
 ## Summary
-
+  - [User Endpoints](#user-endpoints)
   - [Contributors](#contributors)
   
+## User Endpoints
+
+### ```GET /users```
+
+Returns a JSON list of all users as well as associated relationships. Relationships may be empty if user is new and has no gardens, sensors, plants, and data.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/users
+```
+
+Exmaple Response:
+```json
+{
+    "data": [
+        {
+            "id": "1",
+            "type": "user",
+            "attributes": {
+                "id": 1,
+                "email": "rita@example.com"
+            },
+            "relationships": {
+                "user_gardens": {
+                    "data": []
+                },
+                "gardens": {
+                    "data": []
+                }
+            }
+        },
+        
+        {
+            "id": "2",
+            "type": "user",
+            "attributes": {
+                "id": 2,
+                "email": "blake@example.com"
+            },
+            "relationships": {
+                "user_gardens": {
+                    "data": [
+                        {
+                            "id": "479",
+                            "type": "user_garden"
+                        },
+                        {
+                            "id": "483",
+                            "type": "user_garden"
+                        }
+                    ]
+                },
+                "gardens": {
+                    "data": [
+                        {
+                            "id": "486",
+                            "type": "garden"
+                        },
+                        {
+                            "id": "490",
+                            "type": "garden"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
 ## Contributors
 * Alex Desjardins
     * [Link](https://github.com/moosehandlr)
