@@ -34,6 +34,8 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
     - [POST Create sensor](#post-sensors---create-sensor)
     - [PATCH Update sensor](#patch-sensorsid---update-sensor)
     - [DELETE Destroy sensor](#delete-sensorsid---delete-sensor)
+  - [Weather Endpoint](#weather-endpoint)
+    - [GET Forecast](#get-forcast---return-forecast-for-location)
   - [Contributors](#contributors)
   
 ## User Endpoints
