@@ -1,4 +1,4 @@
-class Daily
+class DailyForecast
   attr_reader :temperature, :humidity, :description, :date
   def initialize(data)
     @date = data[:dt]

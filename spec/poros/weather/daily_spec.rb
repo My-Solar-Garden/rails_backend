@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Daily do
+describe DailyForecast do
     it "Exists" do
         data = {
         "daily": [
@@ -287,9 +287,9 @@ describe Daily do
             }
         ]
     }
-        daily = Daily.new(data[:daily][0])
+        daily = DailyForecast.new(data[:daily][0])
 
-        expect(daily).to be_a(Daily)
+        expect(daily).to be_a(DailyForecast)
         expect(daily.temperature).to be_a(Numeric)
         expect(daily.humidity).to be_a(Numeric)
         expect(daily.description).to be_a(String)
