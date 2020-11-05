@@ -1315,6 +1315,81 @@ Exmaple Response:
     }
 }
 ```
+## Search Endpoints
+
+### ```GET /plants/search``` - searching for a plant
+Returns a JSON list of plants that contain the search term (partial or complete). The search term must be added as a query. See example.
+
+Example Request:
+Searching for any plants with 'on' in the name.
+```
+GET https://plants-api-2006.herokuapp.com/api/v1/plants/search?search_term=on
+```
+Exmaple Response:
+```json
+[
+    {
+        "id": 18,
+        "name": "Onion",
+        "description": "Onions are a cold-season crop, easy to grow because of their hardiness. We recommend using onion sets, which can be planted without worry of frost damage and have a higher success rate than direct seed or transplants. Onions grow well on raised beds or raised rows at least 4 inches high.",
+        "optimal_sun": "Full Sun(at least 6 hours a day)",
+        "optimal_soil": "Neutral pH",
+        "planting_considerations": "Select a location with full sun where your onions won't be shaded by other plants. Soil needs to be well-drained, loose, and rich in nitrogen; compact soil affects bulb development.",
+        "when_to_plant": "Plant onions as soon as the ground can be worked in the spring, usually late March or April. Make sure temperature doesn’t go below 20 degrees F.",
+        "growing_from_seed": "Seeding? Onion seeds are short-lived. If planting seeds indoors, start with fresh seeds each year. Start seeds indoors about 6 weeks before transplanting.",
+        "transplanting": "Think of onions as a leaf crop, not a root crop. When planting onion sets, don’t bury them more than one inch under the soil; if more than the bottom third of the bulb is underground, bulb growth can be restricted.",
+        "spacing": "Final spacing should be 4-5 inches between each plant and in rows 12-18 inches apart.",
+        "watering": "Generally, onions do not need consistent watering if mulch is used. About one inch of water per week (including rain water) is sufficient. If you want sweeter onions, water more. Onions will look healthy even if they are bone dry, be sure to water during drought conditions.",
+        "feeding": "Fertilize every few weeks with nitrogen to get big bulbs. Cease fertilizing when the onions push the soil away and the bulbing process has started. Do not put the soil back around the onions; the bulb needs to emerge above the soil.",
+        "other_care": "Make sure soil is well-drained. Mulch will help retain moisture and stifle weeds. Cut or pull any onions that send up flower stalks; this means that the onions have “bolted” and are done. When onions start to mature, the tops become yellow and begin to fall over. At that point, bend the tops down or even stomp on them to speed the final ripening process.",
+        "diseases": "n/a",
+        "pests": "Onion Maggots",
+        "harvesting": "When tops are brown, pull the onions. Be sure to harvest in late summer, before cool weather. Mature onions may spoil in fall weather.",
+        "storage_use": "Allow onions to dry for several weeks before you store them in a root cellar or any other storage area. Spread them out on an open screen off the ground to dry. Store at 40 to 50 degrees F (4 to 10 degrees C) in braids or with the stems broken off. Mature, dry-skinned bulbs like it cool and dry, so don't store them with apples or potatoes.",
+        "image_url": "harvest_helper_production/18_onion"
+    },
+    {
+        "id": 42,
+        "name": "Tarragon",
+        "description": "Tarragon is a perennial herb with long, light green leaves and tiny greenish or yellowish white flowers. For cooking, use French tarragon. Russian tarragon can easily be mistaken for French, but Russian tarragon is coarser and less flavorful than French tarragon.",
+        "optimal_sun": "Full-Part Sun",
+        "optimal_soil": "Loamy, Sandy",
+        "planting_considerations": "Tarragon is a good companion to most vegetables in the garden.",
+        "when_to_plant": "You can tarragon mint as soon as the soil is workable in the spring.",
+        "growing_from_seed": "You can’t grow French tarragon from seeds. You must purchase the plants or take an established plant from a friend’s garden. Get the transplants in the spring or fall.",
+        "transplanting": "Plant the transplants in well-drained soil about 2 to 3 feet apart in order to give each plant room to grow. A full-grown plant should cover about 12 inches of soil.",
+        "spacing": "The plants should grow to around 2 or 3 feet in height. Plant spacing should be around 2-3 feet in all directions.\n",
+        "watering": "Be sure to water the young plants regularly until they are fully grown so that they don't dry out.",
+        "feeding": "n/a",
+        "other_care": "Be sure to prune/harvest the plant regularly to prevent flowering and to keep the height to around 2 feet (otherwise the plant will fall over). If you live in a colder climate, be sure to put mulch around the plants in late fall in order to protect the roots during the winter. To help keep your plants healthy, divide them every 3 to 4 years in the spring or fall. New plants can grow from stem cuttings or root cuttings.",
+        "diseases": "Many rusts, including white rust, Downy mildew, Powdery mildew",
+        "pests": null,
+        "harvesting": "Harvest your plant regularly. Two or three plants will suffice if you regularly prune them. Tarragon is best used fresh in the summer.",
+        "storage_use": "You can freeze the leaves or dry them. If left to dry for too long, though, the leaves lose their flavor, so be careful. As soon as the leaves are dry, store them in airtight containers.",
+        "image_url": "harvest_helper_production/42_tarragon"
+    },
+    {
+        "id": 33,
+        "name": "Watermelon",
+        "description": "Everyone seems to love juicy watermelon in the summertime. Native to Africa, melons need warm temperatures (up to 80 degrees during the day) and a long growing season. Gardeners in colder climates can still have success in growing watermelon by starting seeds indoors and choosing short-season varieties. Days to maturity range from 70 to 90, depending on the variety.",
+        "optimal_sun": "Full Sun(at least 6 hours a day)",
+        "optimal_soil": "Loamy",
+        "planting_considerations": "Amend soil with aged manure, seaweed, and/or compost before planting. Watermelons are heavy feeders. Watermelons prefer a soil pH between 6 and 6.8.",
+        "when_to_plant": "Watermelon vines are very tender and should not be transplanted until all danger of frost has passed. (To be safe, wait at least two weeks past your last frost date.) If you are in a cooler zone, start seeds indoors about a month before transplanting.",
+        "growing_from_seed": "If you live in warmer climates, you can direct sow seeds outdoors, but wait until the soil temperature warms to at least 70 degrees to avoid poor germination.",
+        "transplanting": "Transplant at least two weeks past the last frost date of spring.  After you transplant, cover the plants with row covers to keep pests at bay. You'll remove the row covers when you see both male and female flowers on the vine.",
+        "spacing": "Growing the vines in raised rows, known as hills, ensures good drainage and will hold the sun’s heat longer. Space the plants about 2 feet apart in a 5-foot-wide hill. If you're growing in rows, space 6 feet apart by 6 feet apart. ",
+        "watering": "Watering is very important from planting until fruit begins to form. While melon plants are growing, blooming, and setting fruit, they need 1 to 2 inches of water per week. Keep soil moist but not waterlogged. Water at the vine's base in the morning, and try to avoid wetting the leaves and avoid overhead watering. Reduce watering once fruit are growing. Dry weather produces the sweetest melon.",
+        "feeding": "If you choose to fertilize (and many do), make sure it's deliver more nitrogen than phosphorus and potassium. However, after flowering begins, use a fertilizer with less nitrogen. We like to use liquid seaweed.",
+        "other_care": "Mulching with black plastic will serve multiple purposes: it will warm the soil, hinder weed growth and keep developing fruits clean. Pruning isn't necessary, but vine productivity may be improved if you do not allow lateral (side) vines to grow and stick to the main vine. When the plant is young, just cut off the end buds as they form (before the side shoots become vines). You can also pinch off some blossoms to focus the energy on fewer melons (though it's a challenge to kill off a potential fruit!). As fruit is ripening, prevent rotting by gently lifting it and putting some cardboard or straw between the fruit and the soil.",
+        "diseases": "Aphids, Squash Borers",
+        "pests": "Fusarium Wilt",
+        "harvesting": "Watermelons don’t sweeten after they are picked, so harvest time is important. They generally ripen over two weeks so keep you eye on them. Check the tendril. If it's green, wait. If it’s half-dead, the watermelon is nearly ripe or ripe. If the tendril is fully dead, it's ripe or overripe; it’s not going to get any riper, so you might as well pick! Stems should be cut with a sharp knife close to the fruit.",
+        "storage_use": "Watermelons can be stored uncut for about 10 days. If cut, they can last in the refrigerator for about 4 days. Wrap tightly in plastic.",
+        "image_url": "harvest_helper_production/33_watermelon"
+    }
+]
+```
 
 ## Contributors
 * Alex Desjardins
