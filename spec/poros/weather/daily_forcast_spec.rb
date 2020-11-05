@@ -293,5 +293,6 @@ describe DailyForecast do
         expect(daily.temperature).to be_a(Numeric)
         expect(daily.humidity).to be_a(Numeric)
         expect(daily.description).to be_a(String)
+        expect(daily.date).to be_a(Time)
     end
 end
