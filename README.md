@@ -13,7 +13,7 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
     - [GET All users](#get-users---all-users)
     - [GET One user](#get-usersid---specific-user)
     - [POST Create user](#post-users---create-user)
-    
+    - [PATCH Update user](#patch-usersid---update-user)
   - [Contributors](#contributors)
   
 ## User Endpoints
@@ -226,6 +226,20 @@ Exmaple Response:
     }
 }
 
+```
+
+### ```DELETE /users/:id``` - delete user
+
+Deletes an existing user. The return will be empty with a status code of 204 No Content.
+
+Example Request:
+```
+DELETE https://solar-garden-be.herokuapp.com/api/v1/users/3
+```
+
+Exmaple Response:
+```
+204 No Content
 ```
 
 
