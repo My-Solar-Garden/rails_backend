@@ -34,6 +34,12 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
     - [POST Create sensor](#post-sensors---create-sensor)
     - [PATCH Update sensor](#patch-sensorsid---update-sensor)
     - [DELETE Destroy sensor](#delete-sensorsid---delete-sensor)
+  - [Garden Health Endpoints](#)
+    - [GET All garden health](#)
+    - [GET One garden health](#)
+    - [POST Create garden health](#)
+    - [PATCH Update garden health](#)
+    - [DELETE Destroy garden health](#)
   - [Weather Endpoint](#weather-endpoint)
     - [GET Forecast](#get-forcast---return-forecast-for-location)
   - [Contributors](#contributors)
@@ -1072,6 +1078,165 @@ Exmaple Response:
 ```
 204 No Content
 ```
+## Garden Health Endpoints
+
+### ```GET /garden_healths``` - all garden health
+
+Returns a JSON list of all garden health data for all gardens.
+
+Note: Query is not limited and may return large payload.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/garden_healths
+```
+
+Exmaple Response:
+```json
+{
+    "data": [
+        {
+            "id": "57",
+            "type": "garden_health",
+            "attributes": {
+                "id": 57,
+                "reading_type": "moisture",
+                "reading": 99.0,
+                "created_at": "2020-11-04T00:00:00.000Z"
+            }
+        },
+        {
+            "id": "56",
+            "type": "garden_health",
+            "attributes": {
+                "id": 56,
+                "reading_type": "light",
+                "reading": 700.0,
+                "created_at": "2020-11-05T00:00:00.000Z"
+            }
+        },
+        {
+            "id": "57",
+            "type": "garden_health",
+            "attributes": {
+                "id": 62,
+                "reading_type": "light",
+                "reading": 700.0,
+                "created_at": "2020-11-04T00:00:05.000Z"
+            }
+        }
+    ]
+}
+```
+
+### ```GET /garden_healths/:id``` - specific garden health
+
+Returns a JSON of one garden health data plot.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/garden_healths/62
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "62",
+        "type": "garden_health",
+        "attributes": {
+            "id": 62,
+            "reading_type": "light",
+            "reading": 700.0,
+            "created_at": "2020-11-04T00:00:05.000Z"
+        }
+    }
+}
+```
+
+### ```POST /garden_health``` - create garden health
+
+Create new data for garden health data. Sensor ID, reading type, reading are all required fields. The date and time are automatically recorded when data is created. However, there is a time of reading field which is optional. This is in case the reading was taken manually and at a different date/time than creation of data plot.
+
+Note: sensor_type is an enum and related to a value (0 = moisture, 1 = light, 2 = temperature)
+
+Example Request:
+```
+POST https://solar-garden-be.herokuapp.com/api/v1/sensors
+Content-Type: application/json
+
+{
+   "sensor_id": "5",
+   "reading_type": 0,
+   "reading": 123.456
+   "time_of_reading": "13:00" #optional
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "55",
+        "type": "garden_health",
+        "attributes": {
+            "id": 55,
+            "reading_type": "moisture",
+            "reading": 123.456,
+            "created_at": "2020-10-29T22:59:56.825Z"
+        }
+    }
+}
+```
+
+### ```PATCH /garden_healths/:id``` - update garden health
+
+Updates existing data for garden health. Update some or all variables based on what is entered in the body.
+
+Note: sensor_type is an enum and related to a value (0 = moisture, 1 = light, 2 = temperature)
+
+Example Request:
+```
+PATCH https://solar-garden-be.herokuapp.com/api/v1/garden_healths/55
+Content-Type: application/json
+
+{
+   "reading": 24.40
+   "time_of_reading": "13:00" #optional
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "55",
+        "type": "garden_health",
+        "attributes": {
+            "id": 55,
+            "reading_type": "moisture",
+            "reading": 24.40,
+            "time_of_reading": "13:00",
+            "created_at": "2020-10-29T22:59:56.825Z"
+        }
+    }
+}
+```
+
+### ```DELETE /garden_healths/:id``` - delete garden health
+
+Deletes an existing garden health data plot. The return will be empty with a status code of 204 No Content.
+
+Example Request:
+```
+DELETE https://solar-garden-be.herokuapp.com/api/v1/garden_healths/55
+```
+
+Exmaple Response:
+```
+204 No Content
+```
+
 ## Weather Endpoint
 
 ### ```GET /forecast``` - return forecast for location
