@@ -1074,7 +1074,7 @@ Exmaple Response:
 ```
 ## Weather Endpoint
 
-### ```GET /forcast``` - return forecast for location
+### ```GET /forecast``` - return forecast for location
 
 Returns a JSON of current weather information based on coordinates.
 
