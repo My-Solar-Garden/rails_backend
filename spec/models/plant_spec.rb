@@ -4,7 +4,6 @@ RSpec.describe Plant, type: :model do
   describe 'valdations' do
     it { should validate_presence_of :image }
     it { should validate_presence_of :name }
-    it { should validate_presence_of :species }
     it { should validate_presence_of :description }
     it { should validate_presence_of :light_requirements }
     it { should validate_presence_of :water_requirements }
