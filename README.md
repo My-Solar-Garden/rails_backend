@@ -10,6 +10,10 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
 
 ## Summary
   - [User Endpoints](#user-endpoints)
+    - [GET All users](#get-users---all-users)
+    - [GET One user](#get-users---specific-user)
+    - [POST Create user](#get-users---create-user)
+    
   - [Contributors](#contributors)
   
 ## User Endpoints
@@ -134,6 +138,51 @@ Exmaple Response:
     }
 }
 ```
+
+### ```POST /users``` - create user
+
+Creates a new user. This route is used by oAuth and shouldn't be made manually. You will need to note that the incoming content is json and add the following to the body. Each name/value pair must be filled out. A user will not be created with empty fields.
+
+Example Request:
+```
+POST https://solar-garden-be.herokuapp.com/api/v1/users
+Content-Type: application/json
+
+{
+   "credentials":{
+      "token": "wkdjw1i79h39rnu2i3"
+   },
+   "info":{
+      "email": "john@example.com"
+   },
+   "provider": "google_oauth2",
+   "uid": "12312391398532976374823746"
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "3",
+        "type": "user",
+        "attributes": {
+            "id": 3,
+            "email": "john@example.com"
+        },
+        "relationships": {
+            "user_gardens": {
+                "data": []
+            },
+            "gardens": {
+                "data": []
+            }
+        }
+    }
+}
+
+```
+
 
 ## Contributors
 * Alex Desjardins
