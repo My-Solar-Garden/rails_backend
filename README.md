@@ -11,8 +11,8 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
 ## Summary
   - [User Endpoints](#user-endpoints)
     - [GET All users](#get-users---all-users)
-    - [GET One user](#get-users---specific-user)
-    - [POST Create user](#get-users---create-user)
+    - [GET One user](#get-usersid---specific-user)
+    - [POST Create user](#post-users---create-user)
     
   - [Contributors](#contributors)
   
@@ -151,6 +151,7 @@ Content-Type: application/json
 {
    "credentials":{
       "token": "wkdjw1i79h39rnu2i3"
+      "refresh_token": "lko1238u0012inodw" 
    },
    "info":{
       "email": "john@example.com"
@@ -169,6 +170,50 @@ Exmaple Response:
         "attributes": {
             "id": 3,
             "email": "john@example.com"
+        },
+        "relationships": {
+            "user_gardens": {
+                "data": []
+            },
+            "gardens": {
+                "data": []
+            }
+        }
+    }
+}
+
+```
+
+### ```PATCH /users/:id``` - update user
+
+Updates an existing user. One or more fields can be updated in one request, depending on what is added to the body.
+
+Note: The user's token, refresh_token, provider and uid are not displayed.
+
+Example Request:
+```
+PATCH https://solar-garden-be.herokuapp.com/api/v1/users/3
+Content-Type: application/json
+
+{
+   "credentials":{
+      token": "5555555555555555"
+   },
+   "info":{
+      "email": "johnny@example.com"
+   }
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "3",
+        "type": "user",
+        "attributes": {
+            "id": 3,
+            "email": "johnny@example.com"
         },
         "relationships": {
             "user_gardens": {
