@@ -11,7 +11,7 @@ class PlantService
     response = conn.get(url) do |f|
       f.params = params
     end
-    json = JSON.parse(response.body, symbolize_names: true)
+    JSON.parse(response.body, symbolize_names: true)
   end
 
   def self.conn

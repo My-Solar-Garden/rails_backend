@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 describe 'Gardens' do
-  it "can add a plant if it doesn't exist in the database" do 
+  it "can add a plant if it doesn't exist in the database" do
     garden = create(:garden)
-    plant_params = { 
+    plant_params = {
       image: 'image.url',
       name: 'plant name',
       species: 'plant species',
@@ -19,7 +19,7 @@ describe 'Gardens' do
     post "/api/v1/gardens/#{garden.id}/plants", headers: headers, params: JSON.generate(plant_params)
 
     plant = Plant.first
-    
+
     expect(response).to be_successful
     expect(plant.image).to eq(plant_params[:image])
     expect(plant.name).to eq(plant_params[:name])
@@ -34,10 +34,10 @@ describe 'Gardens' do
     expect(garden.plants).to eq([plant])
   end
 
-  it "can add a plant if it does exist in the database" do 
+  it "can add a plant if it does exist in the database" do
     garden = create(:garden)
     db_plant = create(:plant)
-    plant_params = { 
+    plant_params = {
       image: db_plant.image,
       name: db_plant.name,
       species: db_plant.species,
@@ -66,5 +66,18 @@ describe 'Gardens' do
     expect(plant.common_pests).to eq(plant_params[:common_pests])
     expect(plant.gardens).to eq([garden])
     expect(garden.plants).to eq([plant])
+  end
+
+  it "returns all plants related to a garden" do
+    garden = create(:garden)
+    plant = create(:plant)
+    create_list(:garden_plant, 3, garden: garden, plant: plant)
+
+    get "/api/v1/gardens/#{garden.id}/plants"
+    expect(response).to be_successful
+
+    plants = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    expect(plants.size).to eq(3)
   end
 end

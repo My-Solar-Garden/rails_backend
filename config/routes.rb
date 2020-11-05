@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       end
       namespace :gardens do
         post '/:id/plants', to: 'plants#create'
+        get '/:id/plants', to: 'plants#index'
       end
       resources :gardens
       resources :sensors do

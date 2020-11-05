@@ -8,6 +8,10 @@ class Api::V1::Gardens::PlantsController < ApplicationController
     end
   end
 
+  def index
+    render json: PlantSerializer.new(Garden.find(params[:id]).plants)
+  end
+
   private
   def plant_params
     params.permit(:image, :name, :species, :description, :light_requirements, :water_requirements, :when_to_plant, :harvest_time, :common_pests)
