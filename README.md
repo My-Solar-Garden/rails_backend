@@ -42,6 +42,8 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
     - [DELETE Destroy garden health](#delete-garden_healthsid---delete-garden-health)
   - [Weather Endpoint](#weather-endpoint)
     - [GET Forecast](#get-forcast---return-forecast-for-location)
+  - [Search Endpoint](#search-endpoints)
+    - [GET Plant search](#get-plantssearch---searching-for-a-plant)
   - [Contributors](#contributors)
   
 ## User Endpoints
