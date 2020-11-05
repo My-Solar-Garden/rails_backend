@@ -27,6 +27,13 @@ Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
     - [POST Create plant](#post-plants---create-plant)
     - [PATCH Update plant](#patch-plantsid---update-plant)
     - [DELETE Destroy plant](#delete-plantsid---delete-plant)
+    - [DELETE Destroy garden](#delete-gardensid---delete-garden)
+  - [Sensor Endpoints](#sensor-endpoints)
+    - [GET All sensors](#get-sensors---all-sensors)
+    - [GET One sensor](#get-sensorsid---specific-sensor)
+    - [POST Create sensor](#post-sensors---create-sensor)
+    - [PATCH Update sensor](#patch-sensorsid---update-sensor)
+    - [DELETE Destroy sensor](#delete-sensorsid---delete-sensor)
   - [Contributors](#contributors)
   
 ## User Endpoints
@@ -840,6 +847,230 @@ Exmaple Response:
 ```
 204 No Content
 ```
+
+## Sensor Endpoints
+
+### ```GET /sensors``` - all sensors
+
+Returns a JSON list of all sensors as well as associated relationships.
+
+Note: Garden health relationship might be empty if a sensor has not yet recorded any data for that garden.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/sensors
+```
+
+Exmaple Response:
+```json
+{
+    "data": [
+        {
+            "id": "86",
+            "type": "sensor",
+            "attributes": {
+                "min_threshold": 5,
+                "max_threshold": 100,
+                "sensor_type": "moisture"
+            },
+            "relationships": {
+                "garden": {
+                    "data": {
+                        "id": "7",
+                        "type": "garden"
+                    }
+                },
+                "garden_healths": {
+                    "data": []
+                }
+            }
+        },
+        {
+            "id": "92",
+            "type": "sensor",
+            "attributes": {
+                "min_threshold": 1,
+                "max_threshold": 100,
+                "sensor_type": "light"
+            },
+            "relationships": {
+                "garden": {
+                    "data": {
+                        "id": "488",
+                        "type": "garden"
+                    }
+                },
+                "garden_healths": {
+                    "data": [
+                        {
+                            "id": "56",
+                            "type": "garden_health"
+                        },
+                        {
+                            "id": "59",
+                            "type": "garden_health"
+                        },
+                        {
+                            "id": "60",
+                            "type": "garden_health"
+                        },
+                        {
+                            "id": "61",
+                            "type": "garden_health"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
+```
+
+### ```GET /sensors/:id``` - specific sensor
+
+Returns a JSON of one sensor that matches with ID being passed.
+
+Note: Garden health relationship might be empty if a sensor has not yet recorded any data for that garden.
+
+Example Request:
+```
+GET https://solar-garden-be.herokuapp.com/api/v1/sensors/101
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "101",
+        "type": "sensor",
+        "attributes": {
+            "min_threshold": 6,
+            "max_threshold": 7,
+            "sensor_type": "light"
+        },
+        "relationships": {
+            "garden": {
+                "data": {
+                    "id": "248",
+                    "type": "garden"
+                }
+            },
+            "garden_healths": {
+                "data": [
+                    {
+                        "id": "62",
+                        "type": "garden_health"
+                    }
+                ]
+            }
+        }
+    }
+}
+```
+
+### ```POST /sensors``` - create sensor
+
+Creates a new sensor. You will need to note that the incoming content is json and add the following to the body. Each name/value pair must be filled out. A garden will not be created with empty fields.
+
+Note: sensor_type is an enum and related to a value (0 = moisture, 1 = light, 2 = temperature)
+
+Example Request:
+```
+POST https://solar-garden-be.herokuapp.com/api/v1/sensors
+Content-Type: application/json
+
+{
+   "min_threshold": 5,
+   "max_threshold": 14,
+   "sensor_type": 2,
+   "garden_id": "7"
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "99",
+        "type": "sensor",
+        "attributes": {
+            "min_threshold": 5,
+            "max_threshold": 14,
+            "sensor_type": "temperature"
+        },
+        "relationships": {
+            "garden": {
+                "data": {
+                    "id": "7",
+                    "type": "garden"
+                }
+            },
+            "garden_healths": {
+                "data": []
+            }
+        }
+    }
+}
+```
+
+### ```PATCH /sensors/:id``` - update sensor
+
+Updates an existing sensor. One or more fields can be updated in one request, depending on what is added to the body.
+
+Note: sensor_type is an enum and related to a value (0 = moisture, 1 = light, 2 = temperature)
+
+
+Example Request:
+```
+PATCH https://solar-garden-be.herokuapp.com/api/v1/sensors/99
+Content-Type: application/json
+
+{
+   "min_threshold": 2,
+   "max_threshold": 15,
+}
+```
+
+Exmaple Response:
+```json
+{
+    "data": {
+        "id": "99",
+        "type": "sensor",
+        "attributes": {
+            "min_threshold": 2,
+            "max_threshold": 15,
+            "sensor_type": "temperature"
+        },
+        "relationships": {
+            "garden": {
+                "data": {
+                    "id": "7",
+                    "type": "garden"
+                }
+            },
+            "garden_healths": {
+                "data": []
+            }
+        }
+    }
+}
+```
+
+### ```DELETE /sensors/:id``` - delete sensor
+
+Deletes an existing sensor. The return will be empty with a status code of 204 No Content.
+
+Example Request:
+```
+DELETE https://solar-garden-be.herokuapp.com/api/v1/sensors/99
+```
+
+Exmaple Response:
+```
+204 No Content
+```
+
 
 ## Contributors
 * Alex Desjardins
