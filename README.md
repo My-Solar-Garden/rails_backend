@@ -1,12 +1,15 @@
-# Solar Garden Backend API
+# [My Solar Garden](https://solar-garden-fe.herokuapp.com/) - Backend API
 ![](https://img.shields.io/badge/version-1.0-orange)
 ![](https://img.shields.io/badge/Rails-5.2.4.3-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
 ![](https://img.shields.io/badge/Ruby-2.5.3-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
 [![Build Status](https://travis-ci.com/My-Solar-Garden/rails_backend.svg?branch=main)](https://travis-ci.com/My-Solar-Garden/rails_backend)
 
-Welcome to the backend API for [My Solar Garden](https://github.com/My-Solar-Garden/front_end_rails) web application. If you need help or have a problem, please submit an issue and one of our team members will get to it as soon as possible. Currently no API key is needed for access. However, a key might be needed in the future.
+Welcome to the backend API for [[My Solar Garden](https://solar-garden-fe.herokuapp.com/) web application. If you need help or have a problem, please submit an issue and one of our team members will get to it as soon as possible. Currently no API key is needed for access. However, a key might be needed in the future.
 
-Version 1 URL: ```https://solar-garden-be.herokuapp.com/api/v1```
+[Version 1 URL](https://solar-garden-be.herokuapp.com/api/v1): ```https://solar-garden-be.herokuapp.com/api/v1```
+
+## Repos
+For access to all the repos that make up the Service Oriented Architecture of this application please visit our [origanization page](https://github.com/My-Solar-Garden).
 
 ## Summary
   - [User Endpoints](#user-endpoints)
