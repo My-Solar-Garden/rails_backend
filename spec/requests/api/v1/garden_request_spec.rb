@@ -97,6 +97,21 @@ describe 'garden API' do
       expect(user_garden.garden_id).to eq(new_garden.id)
     end
 
+    it 'can create a new garden with a custom image' do
+      user = create(:user)
+      garden_params = {user_id: user.id, longitude: 100.5, latitude: 97.5, name: "Tomato Garden", private: false, description: "it's a garden, what else do you want to know?"}
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post "/api/v1/gardens", headers: headers, params: JSON.generate(garden_params)
+
+      new_garden = Garden.last
+      expect(response).to be_successful
+      expect(new_garden.image).to be_a(String)
+
+      user_garden = UserGarden.last
+      expect(user_garden.garden_id).to eq(new_garden.id)
+    end
+
     it 'can update an existing garden' do
       garden = create(:garden)
       garden_params = {longitude: 100.5, latitude: 97.5, name: "Other Name", private: false, description: "it's a garden yo"}

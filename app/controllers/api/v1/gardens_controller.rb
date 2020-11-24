@@ -12,6 +12,7 @@ class Api::V1::GardensController < ApplicationController
   def create
     user = User.find(params[:user_id])
     new_garden = user.gardens.create(garden_params)
+    new_garden.image = ImageFacade.new_image(new_garden.name)
     render json: GardenSerializer.new(new_garden) if new_garden.save
   end
 
