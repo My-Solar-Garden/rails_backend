@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         get :garden_healths, to: 'sensors/garden_healths#index'
         get '/garden_healths/last', to: 'sensors/garden_healths#last'
       end
+      get '/carbon_search', to: 'carbon#search'
     end
   end
 end
