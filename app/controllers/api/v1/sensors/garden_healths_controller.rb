@@ -1,6 +1,6 @@
 class Api::V1::Sensors::GardenHealthsController < ApplicationController
   def index
-    render json: GardenHealthSerializer.new(GardenHealth.where(sensor_id: params[:sensor_id]).order(created_at: :desc))
+    render json: GardenHealthSerializer.new(GardenHealth.where(sensor_id: params[:sensor_id]).order(created_at: :asc))
   end
 
   def last
@@ -8,6 +8,6 @@ class Api::V1::Sensors::GardenHealthsController < ApplicationController
   end
 
   def last_five
-    render json: GardenHealthSerializer.new(GardenHealth.where(sensor_id: params[:sensor_id]).order(created_at: :desc).limit(5))
+    render json: GardenHealthSerializer.new(GardenHealth.where(sensor_id: params[:sensor_id]).order(created_at: :asc).limit(5))
   end
 end
