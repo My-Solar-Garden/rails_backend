@@ -10,5 +10,6 @@ class Sensor < ApplicationRecord
   def search_readings_between_dates(start, stop)
     garden_healths
       .where(garden_healths: {created_at: "#{start} 00:00:00".."#{stop} 23:59:59"})
+      .order(created_at: :desc)
   end
 end
