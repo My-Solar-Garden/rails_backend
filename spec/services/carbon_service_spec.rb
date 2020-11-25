@@ -25,6 +25,14 @@ RSpec.describe CarbonService do
         expect(attr).to have_key(:journals)
         expect(attr[:journals]).to be_a(String)
       end
+
+      it "returns no carbon data for a specific plant if doesn't exist" do
+        search = CarbonService.search('woienso')
+        expect(search).to be_a(Hash)
+        expect(search).to have_key(:data)
+        expect(search[:data]).to be_an(Array)
+        expect(search[:data]).to be_empty 
+      end
     end
   end
 end
