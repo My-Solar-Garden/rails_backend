@@ -10,7 +10,7 @@ RSpec.describe "search endpoint" do
   describe 'happy path' do
     it 'searches a specific sensors readings between two dates' do
       start_time = DateTime.now.to_s
-      searched_readings = create_list(:garden_health, 5, sensor_id: @light_sensor.id, reading_type: 1)
+      searched_readings = create_list(:garden_health, 5, sensor_id: @light_sensor.id, reading_type: 1).reverse
       sleep(1)
       stop_time = DateTime.now.to_s
 
