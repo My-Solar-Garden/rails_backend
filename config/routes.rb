@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :sensors do
         get :garden_healths, to: 'sensors/garden_healths#index'
         get '/garden_healths/last', to: 'sensors/garden_healths#last'
+        get '/garden_healths/last_five', to: 'sensors/garden_healths#last_five'
       end
     end
   end

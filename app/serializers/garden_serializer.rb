@@ -5,6 +5,7 @@ class GardenSerializer
   attributes :name
   attributes :description
   attributes :private
+  attributes :image
 
   has_many :user_gardens
   has_many :users, through: :user_gardens
