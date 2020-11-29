@@ -190,11 +190,12 @@ describe 'garden API' do
      expect(response.status).to eq(204)
    end
 
-   it 'create - returns a 204 if query entered wrong' do
+   it 'create - returns a 200 if cannot create garden' do
      user = create(:user)
      post "/api/v1/gardens?user_id=#{user.id}"
      expect(response).to be_successful
-     expect(response.status).to eq(204)
+     expect(response.status).to eq(200)
+     expect(response.body).to eq("{\"error\":\"Could not save garden\"}")
    end
 
    it 'update - returns a 204 if query entered wrong' do

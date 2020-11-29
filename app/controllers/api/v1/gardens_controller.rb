@@ -12,8 +12,14 @@ class Api::V1::GardensController < ApplicationController
   def create
     user = User.find(params[:user_id])
     new_garden = user.gardens.create(garden_params)
-    new_garden.image = ImageFacade.new_image(new_garden.name) if new_garden.save
-    render json: GardenSerializer.new(new_garden) if new_garden.save
+    if new_garden.save
+      image = ImageFacade.new_image(new_garden.name)
+      new_garden.image = image ? image : "/assets/default-garden-5bbbceb5c8def07b7a99e836154844af647a4598ec1250edaf878c68467caad9.png"
+      new_garden.save
+      render json: GardenSerializer.new(new_garden)
+    else
+      render json: {"error": "Could not save garden"}
+    end
   end
 
   def update
