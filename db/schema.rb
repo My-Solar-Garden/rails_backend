@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_11_24_215728) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "uid"
+    t.index ["uid"], name: "index_users_on_uid"
   end
 
   add_foreign_key "garden_healths", "sensors"
