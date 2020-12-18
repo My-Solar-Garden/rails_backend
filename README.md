@@ -4,8 +4,20 @@
 ![](https://img.shields.io/badge/Ruby-2.5.3-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
 [![Build Status](https://travis-ci.com/My-Solar-Garden/rails_backend.svg?branch=main)](https://travis-ci.com/My-Solar-Garden/rails_backend)
 
+### Overview
 Welcome to the backend API for [[My Solar Garden](https://solar-garden-fe.herokuapp.com/) web application. If you need help or have a problem, please submit an issue and one of our team members will get to it as soon as possible. Currently no API key is needed for access. However, a key might be needed in the future.
 
+My Solar Garden is an impact driven app here to support you in helping to keep our planet thriving.  By signing up with My Solar Garden, you will be able to track your garden's health and, eventually, how much carbon is it offsetting. 
+
+My Solar Garden can give you daily updates as to how much moisture and light it's receiving.  It will also provide innovative ideas on how to keep your garden healthy and thriving to continue to make a positive impact on our environment.
+
+We want to live in balance with the diversity of our environment. It all starts with healthy soil, and that's what we will help you learn how to cultivate. It starts with one person. That person, is you.
+
+:3rd_place_medal:	_3rd place winner at Turing's Demo Competition. [Take a look at our presentation](https://www.youtube.com/watch?v=bh7JHxniJk8&t=1s)._
+
+-----
+
+## Live API
 [Version 1 URL](https://solar-garden-be.herokuapp.com/api/v1): ```https://solar-garden-be.herokuapp.com/api/v1```
 
 ## Repos
